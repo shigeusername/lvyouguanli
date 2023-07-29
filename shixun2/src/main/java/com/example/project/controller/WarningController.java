@@ -1,19 +1,20 @@
 package com.example.project.controller;
 
 import com.example.project.common.ResultUtil;
-import com.example.project.entity.VO.WarningVO;
 import com.example.project.entity.Warning;
 import com.example.project.service.WarningDaoServiceImpl;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-
+@RestController
+@Api
 public class WarningController {
     @Autowired
     WarningDaoServiceImpl warningDaoService;
@@ -21,7 +22,7 @@ public class WarningController {
     @GetMapping(value = "findAllWarning")
     @ResponseBody
     @ApiOperation("查看所有警告")
-    public ResultUtil findAllWarning(@RequestBody HashMap<String, String> map) {
+    public ResultUtil findAllWarning(@RequestBody(required=false) HashMap<String, String> map) {
         return ResultUtil.success(warningDaoService.findAllWarning());
     }
 

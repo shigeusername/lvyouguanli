@@ -2,9 +2,10 @@ package com.example.project.service;
 
 import com.example.project.entity.Complaint;
 import com.example.project.entity.VO.ComplaintVO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface ComplaintDaoService {
     List<ComplaintVO> findAllComplaint();
 
@@ -17,6 +18,8 @@ public interface ComplaintDaoService {
     List<ComplaintVO> findComplaintByLevel(int level);
 
     List<ComplaintVO> findComplaintUnCoped();
+
+    List<ComplaintVO> findComplaintCoped();
 
     int AddComplaint(Complaint complain);
 

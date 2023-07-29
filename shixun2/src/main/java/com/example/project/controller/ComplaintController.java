@@ -2,27 +2,26 @@ package com.example.project.controller;
 
 import com.example.project.common.ResultUtil;
 import com.example.project.entity.Complaint;
-import com.example.project.entity.VO.ComplaintVO;
-import com.example.project.entity.Complaint;
-import com.example.project.service.ComplaintDaoService;
 import com.example.project.service.ComplaintDaoServiceImpl;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-
+@RestController
+@Api
 public class ComplaintController {
     @Autowired
     ComplaintDaoServiceImpl complaintDaoService;
     @GetMapping(value = "findAllComplaint")
     @ResponseBody
     @ApiOperation("查看所有投诉")
-    public ResultUtil findAllComplaint(@RequestBody HashMap<String, String> map) {
+    public ResultUtil findAllComplaint(@RequestBody(required=false) HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findAllComplaint());
     }
 
@@ -65,7 +64,12 @@ public class ComplaintController {
     public ResultUtil findComplaintUnCoped(@RequestBody HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findComplaintUnCoped());
     }
-
+    @GetMapping(value = "findComplaintCoped")
+    @ResponseBody
+    @ApiOperation("查找所有已处理投诉")
+    public ResultUtil findComplaintCoped(@RequestBody HashMap<String, String> map) {
+        return ResultUtil.success(complaintDaoService.findComplaintCoped());
+    }
     @GetMapping(value = "AddComplaint")
     @ResponseBody
     @ApiOperation("新增投诉")

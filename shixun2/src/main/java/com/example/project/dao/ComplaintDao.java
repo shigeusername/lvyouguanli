@@ -18,6 +18,8 @@ public interface ComplaintDao {
 
     List<ComplaintVO> findComplaintUnCoped();
 
+    List<ComplaintVO> findComplaintCoped();
+
     int AddComplaint(Complaint complaint);
 
     int DeleteComplaintById(int id);

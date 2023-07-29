@@ -3,12 +3,14 @@ package com.example.project.service;
 import com.example.project.entity.Complaint;
 import com.example.project.entity.VO.ComplaintVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-public class ComplaintDaoServiceImpl implements ComplaintDaoService{
+@Service("ComplaintDaoServiceImpl")
+public class ComplaintDaoServiceImpl implements ComplaintDaoService {
     @Autowired
     ComplaintDaoService complaintDaoService;
+
     @Override
     public List<ComplaintVO> findAllComplaint() {
         return complaintDaoService.findAllComplaint();
@@ -37,6 +39,11 @@ public class ComplaintDaoServiceImpl implements ComplaintDaoService{
     @Override
     public List<ComplaintVO> findComplaintUnCoped() {
         return complaintDaoService.findComplaintUnCoped();
+    }
+
+    @Override
+    public List<ComplaintVO> findComplaintCoped() {
+        return complaintDaoService.findComplaintCoped();
     }
 
     @Override

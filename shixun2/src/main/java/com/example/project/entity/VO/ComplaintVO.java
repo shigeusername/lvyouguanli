@@ -11,7 +11,7 @@ import java.util.Date;
 public class ComplaintVO {
     int id;
     String  sender;
-    int enterprise_id;
+    String enterprise;
     String context;
     int level;
     String if_coped;

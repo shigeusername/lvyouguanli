@@ -2,9 +2,10 @@ package com.example.project.service;
 
 import com.example.project.entity.VO.WarningVO;
 import com.example.project.entity.Warning;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface WarningDaoService {
     List<WarningVO> findAllWarning();
 
