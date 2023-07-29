@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.AdministratorDao">
+
+    <select id="findAll" resultType="com.example.project.entity.Administrator" >
+        select * from administrator limit #{index},#{pagesize};
+    </select>
+
+    <insert id="add" parameterType="com.example.project.entity.Administrator">
+        insert into administrator (affiliated_enterprise,name, age,gender,position)
+        values (#{affiliated_enterprise}, #{name}, #{age}, #{gender},#{position});
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from administrator where id= #{id};
+    </delete>
+
+    <update id="update" parameterType="com.example.project.entity.Administrator">
+        update administrator
+        set affiliated_enterprise=#{affiliated_enterprise}, name=#{name}, age=#{age}, gender=#{gender}, position=#{position} where id = #{id}
+    </update>
+
+    <select id="findAdministratorByName" resultType="com.example.project.entity.Administrator" parameterType="java.lang.String">
+        select * from administrator where name = #{name};
+    </select>
+
+    <select id="findTotalNumber" resultType="int" >
+        select count(*) from administrator;
+    </select>
+
+    <select id="findAdministratorById" resultType="com.example.project.entity.Administrator" parameterType="int">
+        select * from administrator where id = #{id};
+    </select>
+
+    <select id="findAdministratorByAffiliatedEnterprise" resultType="com.example.project.entity.Administrator" parameterType="int">
+        select * from administrator where affiliated_enterprise = #{affiliated_enterprise};
+    </select>
+</mapper>

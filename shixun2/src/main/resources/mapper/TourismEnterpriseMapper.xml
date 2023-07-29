@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.TourismEnterpriseDao">
+
+    <insert id="addTourismEnterprise" parameterType="com.example.project.entity.TourismEnterprise">
+        insert into tourism_enterprise (name, type,capacity,parking_space,current_people,current_parking,location,credit,img,introduction,star,latitude,longitude)
+        values (#{name}, #{type}, #{capacity}, #{parking_space},#{current_people},#{current_parking},#{location},#{credit},#{img},#{introduction},#{star},#{latitude},#{longitude});
+    </insert>
+
+    <!--<insert id="addHotels" parameterType="com.entity.TourismEnterprise">
+        insert into tourism_enterprise (name, type,capacity,parking_space,current_people,current_parking,location,credit,img,introduction,star,latitude,longitude)
+        values (#{name}, '2', #{capacity}, #{parking_space},#{current_people},#{current_parking},#{location},#{credit},#{img},#{introduction},#{star},#{latitude},#{longitude});
+    </insert>
+
+    <insert id="addAgency" parameterType="com.entity.TourismEnterprise">
+        insert into tourism_enterprise (name, type,capacity,parking_space,current_people,current_parking,location,credit,img,introduction,star,latitude,longitude)
+        values (#{name}, '3', #{capacity}, #{parking_space},#{current_people},#{current_parking},#{location},#{credit},#{img},#{introduction},#{star},#{latitude},#{longitude});
+    </insert>-->
+
+    <delete id="delete">
+        delete from tourism_enterprise where id= #{id};
+    </delete>
+
+    <update id="update" parameterType="com.example.project.entity.TourismEnterprise">
+        update tourism_enterprise
+        set name=#{name}, capacity=#{capacity}, parking_space=#{parking_space}, current_people=#{current_people}, current_parking=#{current_parking}, location=#{location}, credit=#{credit}, img=#{img}, introduction=#{introduction}, star=#{star}, latitude=#{latitude}, longitude=#{longitude} where id = #{id}
+    </update>
+
+    <select id="findTourismEnterpriseByName" resultType="com.example.project.entity.TourismEnterprise" parameterType="java.lang.String">
+        select * from tourism_enterprise where name = #{name};
+    </select>
+
+    <select id="findTotalNumberOfAttractions" resultType="int" >
+        select count(*) from tourism_enterprise where type = '1';
+    </select>
+    <select id="findTotalNumberOfHotels" resultType="int" >
+        select count(*) from tourism_enterprise where type = '2';
+    </select>
+    <select id="findTotalNumberOfAgency" resultType="int" >
+        select count(*) from tourism_enterprise where type = '3';
+    </select>
+
+    <select id="findPageAttractions" resultType="com.example.project.entity.TourismEnterprise" >
+        select * from tourism_enterprise where type = '1' order by credit desc limit #{index},#{pagesize};
+    </select>
+
+    <select id="findPageHotels" resultType="com.example.project.entity.TourismEnterprise" >
+        select * from tourism_enterprise where type = '2' order by credit desc limit #{index},#{pagesize};
+    </select>
+
+    <select id="findPageAgency" resultType="com.example.project.entity.TourismEnterprise" >
+        select * from tourism_enterprise where type = '3' order by credit desc limit #{index},#{pagesize};
+    </select>
+
+    <select id="findThreeAttractions" resultType="com.example.project.entity.VO.ConciseTourismEnterprise" >
+        select id,name,img,introduction from tourism_enterprise where type = '1' order by credit desc limit 3;
+    </select>
+
+    <select id="findThreeHotels" resultType="com.example.project.entity.VO.ConciseTourismEnterprise" >
+        select id,name,img,introduction from tourism_enterprise where type = '2' order by credit desc limit 3;
+    </select>
+
+    <select id="findThreeAgency" resultType="com.example.project.entity.VO.ConciseTourismEnterprise" >
+        select id,name,img,introduction from tourism_enterprise where type = '3' order by credit desc limit 3;
+    </select>
+
+    <select id="findAllAttractions" resultType="com.example.project.entity.VO.ConciseTourismEnterprise" >
+        select id,name,img,introduction from tourism_enterprise where type = '1' order by credit desc;
+    </select>
+
+    <select id="findAllHotels" resultType="com.example.project.entity.VO.ConciseTourismEnterprise" >
+        select id,name,img,introduction from tourism_enterprise where type = '2' order by credit desc;
+    </select>
+
+    <select id="findAllAgency" resultType="com.example.project.entity.VO.ConciseTourismEnterprise" >
+        select id,name,img,introduction from tourism_enterprise where type = '3' order by credit desc;
+    </select>
+
+    <select id="findTourismEnterpriseById" resultType="com.example.project.entity.TourismEnterprise" parameterType="int">
+        select * from tourism_enterprise where id = #{id};
+    </select>
+
+</mapper>

@@ -1,0 +1,6 @@
+#这个文件只允许修改active
+#自己环境调自己的文件，push时记得修改回来******************
+#名字小写
+spring:
+  profiles:
+    active: zgm

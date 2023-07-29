@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.GuideDao">
+    <insert id="addGuide" parameterType="com.example.project.entity.Guide">
+        insert guide (id,information,affiliated_agency,academic_degree,speciality,school)
+        values (#{id},#{information},#{affiliated_agency},#{academic_degree},#{speciality},#{school});
+    </insert>
+<!--      仍有疑问-->
+    <select id="findAllGuide" resultType="com.example.project.entity.VO.GuideVO">
+        select guide.*,user.name as name ,user.gender as gender,user.phone as phone ,tourism_enterprise.name as agency_name,itinerary.name as itinerary_name
+        from guide,user,tourism_enterprise,itinerary
+        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and ( guide.itinerary_id =itinerary.id or  guide.itinerary_id is null);
+    </select>
+
+    <select id="findGuideById" resultType="com.example.project.entity.VO.GuideVO">
+        select guide.*,user.name as name ,user.gender as gender,user.phone as phone ,tourism_enterprise.name as agency_name,itinerary.name as itinerary_name
+        from guide,user,tourism_enterprise,itinerary
+        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and guide.itinerary_id =itinerary.id and guide.id=#{id};
+    </select>
+    <delete id="deleteGuideById" parameterType="java.lang.Integer">
+        delete
+        from guide
+        where id = #{id};
+    </delete>
+    <update id="updateGuideById">
+        update guide
+            set affiliated_agency=#{affiliated_agency},information=#{information},academic_degree=#{academic_degree},speciality=#{speciality},school=#{school}
+        where id=#{id}
+    </update>
+    <select id="findGuideVaguely" resultType="com.example.project.entity.VO.GuideVO">
+        select guide.*,user.name as name ,user.gender as gender,user.phone as phone ,tourism_enterprise.name as agency_name,itinerary.name as itinerary_name
+        from guide,user,tourism_enterprise,itinerary
+        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and  guide.itinerary_id =itinerary.id and (user.name like #{str}  or tourism_enterprise.name like #{str});
+    </select>
+    <update id="guideApplyItinerary">
+        update guide
+            set itinerary_id=#{itinerary_id}
+        where id=#{id}
+    </update>
+    <select id="findGuideByAgency_id" resultType="com.example.project.entity.VO.GuideVO">
+        select guide.*,user.name as name ,user.gender as gender,user.phone as phone ,tourism_enterprise.name as agency_name,itinerary.name as itinerary_name
+        from guide,user,tourism_enterprise,itinerary
+        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and  guide.itinerary_id =itinerary.id and guide.affiliated_agency=#{agency_id};
+    </select>
+</mapper>

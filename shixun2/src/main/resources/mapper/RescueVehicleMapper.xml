@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.RescueVehicleDao">
+
+    <select id="findAll" resultType="com.example.project.entity.RescueVehicle" >
+        select * from rescue_vehicle limit #{index},#{pagesize};
+    </select>
+
+    <insert id="add" parameterType="com.example.project.entity.RescueVehicle">
+        insert into rescue_vehicle (license_number, driver_name, driver_age,phone,affiliated_enterprise,driver_gender)
+        values (#{license_number}, #{driver_name}, #{driver_age}, #{phone},#{affiliated_enterprise}, #{driver_gender});
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from rescue_vehicle where id= #{id};
+    </delete>
+
+    <update id="update" parameterType="com.example.project.entity.RescueVehicle">
+        update rescue_vehicle
+        set license_number=#{license_number}, driver_name=#{driver_name}, driver_age=#{driver_age}, phone=#{phone},affiliated_enterprise=#{affiliated_enterprise}, driver_gender=#{driver_gender} where id = #{id}
+    </update>
+
+    <select id="findRescueVehicleByLicenseNumber" resultType="com.example.project.entity.RescueVehicle" parameterType="java.lang.String">
+        select * from rescue_vehicle where license_number = #{license_number};
+    </select>
+
+    <select id="findTotalNumber" resultType="int" >
+        select count(*) from rescue_vehicle;
+    </select>
+
+    <select id="findRescueVehicleById" resultType="com.example.project.entity.RescueVehicle" parameterType="int">
+        select * from rescue_vehicle where id = #{id};
+    </select>
+
+    <select id="findRescueVehicleByAffiliatedEnterprise" resultType="com.example.project.entity.RescueVehicle" parameterType="int">
+        select * from rescue_vehicle where affiliated_enterprise = #{affiliated_enterprise};
+    </select>
+</mapper>
