@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.ComplaintDao">
+    <select id="findAllComplaint" resultType="com.example.project.entity.VO.ComplaintVO">
+        select complaint.id,
+               user.name as sender,
+               complaint.enterprise_id,
+               complaint.level,
+               complaint.if_coped,
+               complaint.send_date
+        from complaint,
+             user
+        where complaint.sender = user.id
+    </select>
+    <select id="findComplaintById" resultType="com.example.project.entity.VO.ComplaintVO">
+        select complaint.id,
+               user.name as sender,
+               complaint.enterprise_id,
+               complaint.level,
+               complaint.if_coped,
+               complaint.send_date
+        from complaint,
+             user
+        where complaint.sender = user.id
+          and complaint.id = #{id}
+    </select>
+    <select id="findComplaintBySender" resultType="com.example.project.entity.VO.ComplaintVO">
+        select complaint.id,
+               user.name as sender,
+               complaint.enterprise_id,
+               complaint.level,
+               complaint.if_coped,
+               complaint.send_date
+        from complaint,
+             user
+        where complaint.sender = user.id
+          and complaint.sender = #{sender}
+    </select>
+    <select id="findComplaintByEnterprise" resultType="com.example.project.entity.VO.ComplaintVO">
+        select complaint.id,
+               user.name as sender,
+               complaint.enterprise_id,
+               complaint.level,
+               complaint.if_coped,
+               complaint.send_date
+        from complaint,
+             user
+        where complaint.sender = user.id
+          and complaint.enterprise_id = #{enterprise_id}
+    </select>
+    <select id="findComplaintByLevel" resultType="com.example.project.entity.VO.ComplaintVO">
+        select complaint.id,
+               user.name as sender,
+               complaint.enterprise_id,
+               complaint.level,
+               complaint.if_coped,
+               complaint.send_date
+        from complaint,
+             user
+        where complaint.sender = user.id
+          and complaint.level = #{level}
+    </select>
+    <select id="findComplaintUnCoped" resultType="com.example.project.entity.VO.ComplaintVO">
+        select complaint.id,
+               user.name as sender,
+               complaint.enterprise_id,
+               complaint.level,
+               complaint.if_coped,
+               complaint.send_date
+        from complaint,
+             user
+        where complaint.sender = user.id
+          and complaint.if_coped = 0
+    </select>
+    <insert id="AddComplaint">
+        insert into complaint (id, sender, enterprise_id, content, level, if_coped, send_date)
+        values (#{id}, #{sender}, #{enterprise_id}, #{content}, #{level}, #{if_coped}, #{send_date});
+    </insert>
+    <delete id="DeleteComplaintById">
+        delete
+        from complaint
+        where id = #{id};
+    </delete>
+    <delete id="DeleteComplaintCoped">
+        delete
+        from complaint
+        where complaint.if_coped=1;
+    </delete>
+    <update id="UpdateComplaint">
+        update complaint
+        set id={id}, sender=#{sender}, enterprise_id=#{enterprise_id}, content=#{content},
+        level=#{level}, if_coped=#{if_coped}, send_date=#{send_date}
+        where id=#{id}
+    </update>
+</mapper>

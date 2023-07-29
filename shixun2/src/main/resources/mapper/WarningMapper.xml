@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.WarningDao">
+    <select id="findAllWarning" resultType="com.example.project.entity.Warning">
+        select warning.id,
+               user.name as sender,
+               warning.content,
+               warning.need_cope,
+               warning.send_time
+        from warning,
+             user
+        where warning.sender = user.id
+    </select>
+    <select id="findWarningById" resultType="com.example.project.entity.VO.WarningVO">
+        select warning.id,
+               user.name as sender,
+               warning.content,
+               warning.need_cope,
+               warning.send_time
+        from warning,
+             user
+        where warning.sender = user.id
+          and warning.id = #{id}
+    </select>
+    <select id="findAllWarningNeedCope" resultType="com.example.project.entity.VO.WarningVO">
+        select warning.id,
+               user.name as sender,
+               warning.content,
+               warning.need_cope,
+               warning.send_time
+        from warning,
+             user
+        where warning.sender = user.id
+          and warning.need_cope=0
+    </select>
+    <select id="findAllWarningNoRequired" resultType="com.example.project.entity.VO.WarningVO">
+        select warning.id,
+               user.name as sender,
+               warning.content,
+               warning.need_cope,
+               warning.send_time
+        from warning,
+             user
+        where warning.sender = user.id
+          and warning.need_cope=1
+    </select>
+    <select id="findAllWarningCoping" resultType="com.example.project.entity.VO.WarningVO">
+        select warning.id,
+               user.name as sender,
+               warning.content,
+               warning.need_cope,
+               warning.send_time
+        from warning,
+             user
+        where warning.sender = user.id
+          and warning.need_cope=2
+    </select>
+    <select id="findAllWarningDone" resultType="com.example.project.entity.VO.WarningVO">
+        select warning.id,
+               user.name as sender,
+               warning.content,
+               warning.need_cope,
+               warning.send_time
+        from warning,
+             user
+        where warning.sender = user.id
+          and warning.need_cope=3
+    </select>
+    <insert id="AddWarning">
+        insert into warning (id, content, sender,need_cope , send_time)
+        values (#{id}, #{content}, #{sender}, #{need_cope}, #{send_time});
+    </insert>
+    <delete id="DeleteWarningById">
+        delete
+        from warning
+        where id = #{id};
+    </delete>
+    <delete id="DeleteWarningCoped">
+        delete
+        from warning
+        where warning.if_coped=1;
+    </delete>
+    <update id="UpdateWarning">
+        update warning
+        set id={id},content =#{content}, sender=#{sender}, need_cope=#{need_cope},
+        send_time=#{send_time}
+        where id=#{id}
+    </update>
+</mapper>
