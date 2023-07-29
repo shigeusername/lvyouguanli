@@ -1,11 +1,11 @@
-package com.example.project.dao;
+package com.example.project.service;
 
 import com.example.project.entity.VO.WarningVO;
 import com.example.project.entity.Warning;
 
 import java.util.List;
 
-public interface WarningDao {
+public interface WarningDaoService {
     List<WarningVO> findAllWarning();
 
     WarningVO findWarningById(int id);
@@ -24,5 +24,5 @@ public interface WarningDao {
 
     int DeleteWarningCoped();
 
-    int UpdateWarning(Warning warning);
+    int UpdateWarning(Warning Warning);
 }

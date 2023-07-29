@@ -1,11 +1,11 @@
-package com.example.project.dao;
+package com.example.project.service;
 
 import com.example.project.entity.Complaint;
 import com.example.project.entity.VO.ComplaintVO;
 
 import java.util.List;
 
-public interface ComplaintDao {
+public interface ComplaintDaoService {
     List<ComplaintVO> findAllComplaint();
 
     ComplaintVO findComplaintById(int id);
@@ -18,7 +18,7 @@ public interface ComplaintDao {
 
     List<ComplaintVO> findComplaintUnCoped();
 
-    int AddComplaint(Complaint complaint);
+    int AddComplaint(Complaint complain);
 
     int DeleteComplaintById(int id);
 
