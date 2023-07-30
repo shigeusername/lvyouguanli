@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.project.dao.WarningDao">
-    <select id="findAllWarning" resultType="com.example.project.entity.Warning">
+    <select id="findAllWarning" resultType="com.example.project.entity.VO.WarningVO">
         select warning.id,
                user.name as sender,
                warning.content,
@@ -85,7 +85,7 @@
     <delete id="DeleteWarningCoped">
         delete
         from warning
-        where warning.if_coped=1;
+        where warning.need_cope=1;
     </delete>
     <update id="UpdateWarning">
         update warning
