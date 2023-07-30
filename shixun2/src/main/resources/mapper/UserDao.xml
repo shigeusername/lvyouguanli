@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.UserDao">
+    <insert id="add" parameterType="com.example.project.entity.User">
+        insert user (account, password, name, salt, type)
+        values (#{account}, #{password}, #{name}, #{salt}, #{type});
+    </insert>
+    <select id="findUserByAccount" resultType="java.lang.Boolean" parameterType="java.lang.String">
+        select exists (
+            select 1
+            from user
+            where account = #{account}
+        )
+    </select>
+
+    <update id="updatePasswordById">
+        UPDATE user SET password = #{password} WHERE id = #{id}
+    </update>
+</mapper>

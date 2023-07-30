@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.dao.ItineraryDao">
+    <!-- 查找旅行团全部信息 -->
+    <select id="findall" resultType="com.example.project.entity.Itinerary">
+        SELECT i.* FROM itinerary i
+        INNER JOIN tourism_enterprise t ON i.affiliated_agency = t.id
+        <where>
+
+            <if test="i_name != null and i_name != ''">
+                AND t.name = #{i_name}
+            </if>
+            <if test="price_down != null">
+                AND i.price &gt; #{price_down}
+            </if>
+            <if test="price_up != null">
+                AND i.price &lt; #{price_up}
+            </if>
+            AND i.id NOT IN (
+            SELECT DISTINCT itinerary_id FROM guide
+            )
+        </where>
+    </select>
+
+    <!-- 根据景区id查景区名 -->
+    <select id="findJById" resultType="string">
+        select name from tourism_enterprise where id = #{id}
+    </select>
+
+    <!-- 根据行程单id查行程详情-->
+    <select id="findXjById" resultType="com.example.project.entity.Itinerary">
+        select * from itinerary where id = #{id}
+    </select>
+
+    <!-- 根据行程单号查当前行程单的人数-->
+    <select id="countTGById" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tour_group WHERE itinerary_id = #{id}
+    </select>
+
+    <!-- 根据行程单id查导游名称-->
+    <select id="findGNById" resultType="string">
+        SELECT u.name
+        FROM user u
+                 JOIN guide g ON u.id = g.id
+        WHERE g.itinerary_id = #{id}
+    </select>
+
+    <!-- 根据旅行团id和用户id预约旅行团-->
+    <insert id="reverseTG">
+        INSERT INTO tour_group (itinerary_id, user_id)
+        VALUES (#{t_id}, #{u_id})
+    </insert>
+
+    <!-- 根据用户id查我的所有预约-->
+    <select id="getMyReverse" resultType="com.example.project.entity.Tour_group">
+        SELECT * FROM tour_group WHERE user_id = #{id}
+    </select>
+
+    <!-- 删除用户预约-->
+    <delete id="deleteTGByUIII">
+        DELETE FROM tour_group WHERE user_id = #{u_id} AND itinerary_id = #{i_id}
+    </delete>
+
+    <!-- 根据导游id查导游信息-->
+    <select id="getGuideById" resultType="com.example.project.entity.VO.Tguide">
+        SELECT * FROM guide WHERE id = #{id}
+    </select>
+
+    <select id="findTNameImgById" resultType="com.example.project.entity.VO.Sinformation">
+        SELECT * FROM tourism_enterprise WHERE id = #{id}
+    </select>
+
+    <select id="findUserByGid" resultType="com.example.project.entity.User">
+        SELECT u.* FROM user u
+                            INNER JOIN tour_group tg ON u.id = tg.user_id
+                            INNER JOIN guide g ON tg.itinerary_id = g.itinerary_id AND g.id = #{id}
+    </select>
+
+    <select id="findAllGuide" resultType="com.example.project.entity.Itinerary">
+        SELECT * FROM itinerary
+        WHERE id NOT IN (
+            SELECT DISTINCT itinerary_id FROM guide
+        )
+    </select>
+
+    <update id="updateGIIdById">
+        UPDATE guide SET itinerary_id = #{i_id} WHERE id = #{g_id}
+    </update>
+</mapper>
