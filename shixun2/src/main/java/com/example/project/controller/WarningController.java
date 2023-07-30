@@ -65,13 +65,12 @@ public class WarningController {
     @ResponseBody
     @ApiOperation("新增警告")
     public ResultUtil AddWarning(@RequestBody HashMap<String, String> map) {
-        int id = Integer.parseInt(map.get("id"));
         String content = map.get("content");
         int sender = Integer.parseInt(map.get("sender"));
         String need_cope = map.get("need_cope");
         Timestamp send_time = new Timestamp(System.currentTimeMillis());
         String title = map.get("title");
-        Warning warning = new Warning(id, content, sender, need_cope, send_time, title);
+        Warning warning = new Warning(content, sender, need_cope, send_time, title);
         return ResultUtil.success(warningDaoService.AddWarning(warning));
     }
 
