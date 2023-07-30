@@ -1,10 +1,11 @@
 package com.example.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,5 +14,7 @@ public class Warning {
     String content;
     int sender;
     String need_cope;
-    Date send_time;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    Timestamp send_time;
+    String title;
 }

@@ -8,17 +8,19 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
+
 @RestController
 @Api
 public class ComplaintController {
     @Autowired
     ComplaintDaoServiceImpl complaintDaoService;
+
     @PostMapping(value = "findAllComplaint")
     @ResponseBody
     @ApiOperation("查看所有投诉")
-    public ResultUtil findAllComplaint(@RequestBody(required=false) HashMap<String, String> map) {
+    public ResultUtil findAllComplaint(@RequestBody(required = false) HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findAllComplaint());
     }
 
@@ -61,12 +63,14 @@ public class ComplaintController {
     public ResultUtil findComplaintUnCoped(@RequestBody HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findComplaintUnCoped());
     }
+
     @PostMapping(value = "findComplaintCoped")
     @ResponseBody
     @ApiOperation("查找所有已处理投诉")
     public ResultUtil findComplaintCoped(@RequestBody HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findComplaintCoped());
     }
+
     @PostMapping(value = "AddComplaint")
     @ResponseBody
     @ApiOperation("新增投诉")
@@ -77,8 +81,9 @@ public class ComplaintController {
         String context = map.get("context");
         int level = Integer.parseInt(map.get("level"));
         String if_coped = map.get("if_coped");
-        Date send_date = new Date();
-        Complaint complaint = new Complaint(id,sender,enterprise_id,context,level,if_coped,send_date);
+        Date send_date = new Date(System.currentTimeMillis());
+        String title = map.get("title");
+        Complaint complaint = new Complaint(id, sender, enterprise_id, context, level, if_coped, send_date, title);
         return ResultUtil.success(complaintDaoService.AddComplaint(complaint));
     }
 
@@ -107,8 +112,9 @@ public class ComplaintController {
         String context = map.get("context");
         int level = Integer.parseInt(map.get("level"));
         String if_coped = map.get("if_coped");
-        Date send_date = new Date();
-        Complaint complaint = new Complaint(id,sender,enterprise_id,context,level,if_coped,send_date);
+        Date send_date = new Date(System.currentTimeMillis());
+        String title = map.get("title");
+        Complaint complaint = new Complaint(id, sender, enterprise_id, context, level, if_coped, send_date, title);
         return ResultUtil.success(complaintDaoService.UpdateComplaint(complaint));
     }
 }

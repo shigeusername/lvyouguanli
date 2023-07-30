@@ -8,7 +8,8 @@
                tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
-               complaint.send_date
+               complaint.send_date,
+               complaint.title
         from complaint,
              user,
              tourism_enterprise
@@ -21,7 +22,8 @@
                tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
-               complaint.send_date
+               complaint.send_date,
+               complaint.title
         from complaint,
              user,
              tourism_enterprise
@@ -35,7 +37,8 @@
                tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
-               complaint.send_date
+               complaint.send_date,
+               complaint.title
         from complaint,
              user,
              tourism_enterprise
@@ -49,7 +52,8 @@
                tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
-               complaint.send_date
+               complaint.send_date,
+               complaint.title
         from complaint,
              user,
              tourism_enterprise
@@ -63,7 +67,8 @@
                tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
-               complaint.send_date
+               complaint.send_date,
+               complaint.title
         from complaint,
              user,
              tourism_enterprise
@@ -77,7 +82,8 @@
                tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
-               complaint.send_date
+               complaint.send_date,
+               complaint.title
         from complaint,
              user,
              tourism_enterprise
@@ -91,7 +97,8 @@
                tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
-               complaint.send_date
+               complaint.send_date,
+               complaint.title
         from complaint,
              user,
              tourism_enterprise
@@ -100,8 +107,8 @@
           and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <insert id="AddComplaint">
-        insert into complaint (id, sender, enterprise_id, content, level, if_coped, send_date)
-        values (#{id}, #{sender}, #{enterprise_id}, #{content}, #{level}, #{if_coped}, #{send_date});
+        insert into complaint (id, sender, enterprise_id, content, level, if_coped, send_date,title)
+        values (#{id}, #{sender}, #{enterprise_id}, #{content}, #{level}, #{if_coped}, #{send_date},#{title});
     </insert>
     <delete id="DeleteComplaintById">
         delete
@@ -116,7 +123,7 @@
     <update id="UpdateComplaint">
         update complaint
         set id={id}, sender=#{sender}, enterprise_id=#{enterprise_id}, content=#{content},
-        level=#{level}, if_coped=#{if_coped}, send_date=#{send_date}
+        level=#{level}, if_coped=#{if_coped}, send_date=#{send_date},title=#{title}
         where id=#{id}
     </update>
 </mapper>

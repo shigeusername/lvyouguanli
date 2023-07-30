@@ -7,7 +7,8 @@
                user.name as sender,
                warning.content,
                warning.need_cope,
-               warning.send_time
+               warning.send_time,
+               warning.title
         from warning,
              user
         where warning.sender = user.id
@@ -17,7 +18,8 @@
                user.name as sender,
                warning.content,
                warning.need_cope,
-               warning.send_time
+               warning.send_time,
+               warning.title
         from warning,
              user
         where warning.sender = user.id
@@ -28,7 +30,8 @@
                user.name as sender,
                warning.content,
                warning.need_cope,
-               warning.send_time
+               warning.send_time,
+               warning.title
         from warning,
              user
         where warning.sender = user.id
@@ -39,7 +42,8 @@
                user.name as sender,
                warning.content,
                warning.need_cope,
-               warning.send_time
+               warning.send_time,
+               warning.title
         from warning,
              user
         where warning.sender = user.id
@@ -50,7 +54,8 @@
                user.name as sender,
                warning.content,
                warning.need_cope,
-               warning.send_time
+               warning.send_time,
+               warning.title
         from warning,
              user
         where warning.sender = user.id
@@ -61,15 +66,16 @@
                user.name as sender,
                warning.content,
                warning.need_cope,
-               warning.send_time
+               warning.send_time,
+               warning.title
         from warning,
              user
         where warning.sender = user.id
           and warning.need_cope=3
     </select>
     <insert id="AddWarning">
-        insert into warning (id, content, sender,need_cope , send_time)
-        values (#{id}, #{content}, #{sender}, #{need_cope}, #{send_time});
+        insert into warning (id, content, sender,need_cope , send_time,title)
+        values (#{id}, #{content}, #{sender}, #{need_cope}, #{send_time},#{title});
     </insert>
     <delete id="DeleteWarningById">
         delete
@@ -84,7 +90,7 @@
     <update id="UpdateWarning">
         update warning
         set id={id},content =#{content}, sender=#{sender}, need_cope=#{need_cope},
-        send_time=#{send_time}
+        send_time=#{send_time},title=#{title}
         where id=#{id}
     </update>
 </mapper>
