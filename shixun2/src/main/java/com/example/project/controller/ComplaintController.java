@@ -45,6 +45,7 @@ public class ComplaintController {
     @ApiOperation("根据企业查找投诉")
     public ResultUtil findComplaintByEnterprise(@RequestBody HashMap<String, String> map) {
         int enterprise_id = Integer.parseInt(map.get("enterprise_id"));
+        System.out.println(enterprise_id);
         return ResultUtil.success(complaintDaoService.findComplaintByEnterprise(enterprise_id));
     }
 
