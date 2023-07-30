@@ -115,4 +115,8 @@ public class TourismEnterpriseDaoServiceImpl implements TourismEnterpriseDaoServ
     public TourismEnterprise findTourismEnterpriseById(int id) {
         return tourismEnterpriseDAO.findTourismEnterpriseById(id);
     }
+
+    //根据投诉表修改企业的诚信分数 shao
+    @Override
+    public int updateCreditByComplaint(int eid,double fen){return tourismEnterpriseDAO.updateCreditByComplaint(eid,fen);}
 }

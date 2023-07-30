@@ -1,5 +1,6 @@
 package com.example.project.controller;
 
+import com.example.project.common.ResultUtil;
 import com.example.project.utils.RedisUtil;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ValidateController {
 
 
     @RequestMapping("kaptcha")
-    public Map<String, Object> getKaptchaImage(HttpServletResponse response) throws IOException {
+    public ResultUtil getKaptchaImage(HttpServletResponse response) throws IOException {
 
         //生成验证码
         String capText = captchaProducer.createText();
@@ -48,7 +49,8 @@ public class ValidateController {
         Map<String, Object> map = new HashMap<>();
         Base64.Encoder encoder = Base64.getEncoder();
         map.put("captcha", "data:image/jpg;base64," + encoder.encodeToString(captcha));
-        return map;
+
+        return  ResultUtil.success(map);
 
     }
 }

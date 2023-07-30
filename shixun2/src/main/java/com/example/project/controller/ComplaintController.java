@@ -3,6 +3,7 @@ package com.example.project.controller;
 import com.example.project.common.ResultUtil;
 import com.example.project.entity.Complaint;
 import com.example.project.service.ComplaintDaoServiceImpl;
+import com.example.project.service.TourismEnterpriseDaoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 public class ComplaintController {
     @Autowired
     ComplaintDaoServiceImpl complaintDaoService;
+    TourismEnterpriseDaoService tourismEnterpriseDaoService;
 
     @PostMapping(value = "findAllComplaint")
     @ResponseBody
@@ -84,6 +86,7 @@ public class ComplaintController {
         String if_coped = map.get("if_coped");
         Date send_date = new Date(System.currentTimeMillis());
         String title = map.get("title");
+        tourismEnterpriseDaoService.updateCreditByComplaint(enterprise_id,0.2*level);
         Complaint complaint = new Complaint(id, sender, enterprise_id, context, level, if_coped, send_date, title);
         return ResultUtil.success(complaintDaoService.AddComplaint(complaint));
     }

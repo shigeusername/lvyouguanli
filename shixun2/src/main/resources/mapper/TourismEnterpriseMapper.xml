@@ -80,4 +80,10 @@
         select * from tourism_enterprise where id = #{id};
     </select>
 
+    <update id="updateCreditByComplaint" >
+        update tourism_enterprise
+        set credit=credit-#{fen} where id = #{eid}
+    </update>
+
+
 </mapper>

@@ -45,7 +45,7 @@ public class TourismEnterpriseController {
         int iparking_space=Integer.parseInt(parking_space);
         int icurrent_people=Integer.parseInt(current_people);
         int icurrent_parking=Integer.parseInt(current_parking);
-        int icredit=Integer.parseInt(credit);
+        double icredit=Double.parseDouble(credit);
         int istar=Integer.parseInt(star);
         double dlatitude=Double.parseDouble(latitude);
         double dlongitude=Double.parseDouble(longitude);
@@ -79,7 +79,7 @@ public class TourismEnterpriseController {
         int iparking_space=Integer.parseInt(parking_space);
         int icurrent_people=Integer.parseInt(current_people);
         int icurrent_parking=Integer.parseInt(current_parking);
-        int icredit=Integer.parseInt(credit);
+        double icredit=Double.parseDouble(credit);
         int istar=Integer.parseInt(star);
         double dlatitude=Double.parseDouble(latitude);
         double dlongitude=Double.parseDouble(longitude);
@@ -112,7 +112,7 @@ public class TourismEnterpriseController {
         int iparking_space=Integer.parseInt(parking_space);
         int icurrent_people=Integer.parseInt(current_people);
         int icurrent_parking=Integer.parseInt(current_parking);
-        int icredit=Integer.parseInt(credit);
+        double icredit=Double.parseDouble(credit);
         int istar=Integer.parseInt(star);
         double dlatitude=Double.parseDouble(latitude);
         double dlongitude=Double.parseDouble(longitude);
@@ -144,7 +144,7 @@ public class TourismEnterpriseController {
         int current_parking=Integer.parseInt(scurrent_parking);
         String location = map.get("location");
         String scredit =map.get("credit");
-        int credit=Integer.parseInt(scredit);
+        double credit=Double.parseDouble(scredit);
         String img = map.get("img");
         String introduction = map.get("introduction");
         String sstar = map.get("star");

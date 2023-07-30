@@ -14,14 +14,14 @@ public class TourismEnterprise {
     private int current_people;//当前人数
     private int current_parking;//当前车位数
     private String location;//旅游企业位置
-    private int credit;//诚信状况分数
+    private double credit;//诚信状况分数
     private String img;//图片
     private String introduction;//介绍
     private int star;//星级
     private double latitude;//经度
     private double longitude;//纬度
 
-    public TourismEnterprise(String name, String type, int capacity, int parking_space, int current_people, int current_parking, String location, int credit, String img, String introduction, int star, double latitude, double longitude) {
+    public TourismEnterprise(String name, String type, int capacity, int parking_space, int current_people, int current_parking, String location, double credit, String img, String introduction, int star, double latitude, double longitude) {
         this.name = name;
         this.type = type;
         this.capacity = capacity;

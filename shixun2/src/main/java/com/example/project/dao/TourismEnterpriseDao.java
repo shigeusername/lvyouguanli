@@ -56,4 +56,7 @@ public interface TourismEnterpriseDao {
 
     //根据id查找单个旅游企业详情
     TourismEnterprise findTourismEnterpriseById(int id);
+
+    //根据投诉表修改企业的诚信分数 shao
+    int updateCreditByComplaint(int eid,double fen);
 }
