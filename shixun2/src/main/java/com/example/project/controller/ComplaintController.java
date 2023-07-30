@@ -6,10 +6,7 @@ import com.example.project.service.ComplaintDaoServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,14 +15,14 @@ import java.util.HashMap;
 public class ComplaintController {
     @Autowired
     ComplaintDaoServiceImpl complaintDaoService;
-    @GetMapping(value = "findAllComplaint")
+    @PostMapping(value = "findAllComplaint")
     @ResponseBody
     @ApiOperation("查看所有投诉")
     public ResultUtil findAllComplaint(@RequestBody(required=false) HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findAllComplaint());
     }
 
-    @GetMapping(value = "findComplaintById")
+    @PostMapping(value = "findComplaintById")
     @ResponseBody
     @ApiOperation("根据id查找投诉")
     public ResultUtil findComplaintById(@RequestBody HashMap<String, String> map) {
@@ -33,7 +30,7 @@ public class ComplaintController {
         return ResultUtil.success(complaintDaoService.findComplaintById(id));
     }
 
-    @GetMapping(value = "findComplaintBySender")
+    @PostMapping(value = "findComplaintBySender")
     @ResponseBody
     @ApiOperation("根据投诉者查找投诉")
     public ResultUtil findComplaintBySender(@RequestBody HashMap<String, String> map) {
@@ -41,7 +38,7 @@ public class ComplaintController {
         return ResultUtil.success(complaintDaoService.findComplaintBySender(sender));
     }
 
-    @GetMapping(value = "findComplaintByEnterprise")
+    @PostMapping(value = "findComplaintByEnterprise")
     @ResponseBody
     @ApiOperation("根据企业查找投诉")
     public ResultUtil findComplaintByEnterprise(@RequestBody HashMap<String, String> map) {
@@ -49,7 +46,7 @@ public class ComplaintController {
         return ResultUtil.success(complaintDaoService.findComplaintByEnterprise(enterprise_id));
     }
 
-    @GetMapping(value = "findComplaintByLevel")
+    @PostMapping(value = "findComplaintByLevel")
     @ResponseBody
     @ApiOperation("根据程度查找投诉")
     public ResultUtil findComplaintByLevel(@RequestBody HashMap<String, String> map) {
@@ -58,19 +55,19 @@ public class ComplaintController {
         return ResultUtil.success(complaintDaoService.findComplaintByLevel(level));
     }
 
-    @GetMapping(value = "findComplaintUnCoped")
+    @PostMapping(value = "findComplaintUnCoped")
     @ResponseBody
     @ApiOperation("查找所有未处理投诉")
     public ResultUtil findComplaintUnCoped(@RequestBody HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findComplaintUnCoped());
     }
-    @GetMapping(value = "findComplaintCoped")
+    @PostMapping(value = "findComplaintCoped")
     @ResponseBody
     @ApiOperation("查找所有已处理投诉")
     public ResultUtil findComplaintCoped(@RequestBody HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.findComplaintCoped());
     }
-    @GetMapping(value = "AddComplaint")
+    @PostMapping(value = "AddComplaint")
     @ResponseBody
     @ApiOperation("新增投诉")
     public ResultUtil AddComplaint(@RequestBody HashMap<String, String> map) {
@@ -85,7 +82,7 @@ public class ComplaintController {
         return ResultUtil.success(complaintDaoService.AddComplaint(complaint));
     }
 
-    @GetMapping(value = "DeleteComplaintById")
+    @PostMapping(value = "DeleteComplaintById")
     @ResponseBody
     @ApiOperation("通过id删除投诉")
     public ResultUtil<Integer> DeleteComplaintById(@RequestBody HashMap<String, String> map) {
@@ -93,14 +90,14 @@ public class ComplaintController {
         return ResultUtil.success(complaintDaoService.DeleteComplaintById(id));
     }
 
-    @GetMapping(value = "DeleteComplaintCoped")
+    @PostMapping(value = "DeleteComplaintCoped")
     @ResponseBody
     @ApiOperation("删除所有已处理投诉")
     public ResultUtil<Integer> DeleteComplaintCoped(@RequestBody HashMap<String, String> map) {
         return ResultUtil.success(complaintDaoService.DeleteComplaintCoped());
     }
 
-    @GetMapping(value = "UpdateComplaint")
+    @PostMapping(value = "UpdateComplaint")
     @ResponseBody
     @ApiOperation("更改已有投诉")
     public ResultUtil<Integer> UpdateComplaint(@RequestBody HashMap<String, String> map) {

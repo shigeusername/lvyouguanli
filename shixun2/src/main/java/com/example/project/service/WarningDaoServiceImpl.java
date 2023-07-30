@@ -1,5 +1,6 @@
 package com.example.project.service;
 
+import com.example.project.dao.WarningDao;
 import com.example.project.entity.VO.WarningVO;
 import com.example.project.entity.Warning;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,54 +10,54 @@ import java.util.List;
 @Service("WarningDaoServiceImpl")
 public class WarningDaoServiceImpl implements WarningDaoService{
     @Autowired
-    WarningDaoService warningDaoService;
+    WarningDao warningDao;
     @Override
     public List<WarningVO> findAllWarning() {
-        return warningDaoService.findAllWarning();
+        return warningDao.findAllWarning();
     }
 
     @Override
     public WarningVO findWarningById(int id) {
-        return warningDaoService.findWarningById(id);
+        return warningDao.findWarningById(id);
     }
 
     @Override
     public List<WarningVO> findAllWarningNeedCope() {
-        return warningDaoService.findAllWarningNeedCope();
+        return warningDao.findAllWarningNeedCope();
     }
 
     @Override
     public List<WarningVO> findAllWarningNoRequired() {
-        return warningDaoService.findAllWarningNoRequired();
+        return warningDao.findAllWarningNoRequired();
     }
 
     @Override
     public List<WarningVO> findAllWarningCoping() {
-        return warningDaoService.findAllWarningCoping();
+        return warningDao.findAllWarningCoping();
     }
 
     @Override
     public List<WarningVO> findAllWarningDone() {
-        return warningDaoService.findAllWarningDone();
+        return warningDao.findAllWarningDone();
     }
 
     @Override
     public int AddWarning(Warning warning) {
-        return warningDaoService.AddWarning(warning);
+        return warningDao.AddWarning(warning);
     }
 
     @Override
     public int DeleteWarningById(int id) {
-        return warningDaoService.DeleteWarningById(id);
+        return warningDao.DeleteWarningById(id);
     }
 
     @Override
     public int DeleteWarningCoped() {
-        return warningDaoService.DeleteWarningCoped();
+        return warningDao.DeleteWarningCoped();
     }
 
     @Override
     public int UpdateWarning(Warning warning) {
-        return warningDaoService.UpdateWarning(warning);
+        return warningDao.UpdateWarning(warning);
     }
 }

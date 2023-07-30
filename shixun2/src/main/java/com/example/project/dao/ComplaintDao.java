@@ -2,9 +2,12 @@ package com.example.project.dao;
 
 import com.example.project.entity.Complaint;
 import com.example.project.entity.VO.ComplaintVO;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Mapper
+@Repository
 public interface ComplaintDao {
     List<ComplaintVO> findAllComplaint();
 

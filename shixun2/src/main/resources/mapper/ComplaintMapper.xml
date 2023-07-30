@@ -5,13 +5,15 @@
     <select id="findAllComplaint" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
                user.name as sender,
-               complaint.enterprise_id,
+               tourism_enterprise.name as enterprise,
                complaint.level,
                complaint.if_coped,
                complaint.send_date
         from complaint,
-             user
+             user,
+             tourism_enterprise
         where complaint.sender = user.id
+          and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <select id="findComplaintById" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -25,6 +27,7 @@
              tourism_enterprise
         where complaint.sender = user.id
           and complaint.id = #{id}
+          and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <select id="findComplaintBySender" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -38,6 +41,7 @@
              tourism_enterprise
         where complaint.sender = user.id
           and complaint.sender = #{sender}
+          and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <select id="findComplaintByEnterprise" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -51,6 +55,7 @@
              tourism_enterprise
         where complaint.sender = user.id
           and complaint.enterprise_id = #{enterprise_id}
+          and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <select id="findComplaintByLevel" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -64,6 +69,7 @@
              tourism_enterprise
         where complaint.sender = user.id
           and complaint.level = #{level}
+          and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <select id="findComplaintUnCoped" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -77,6 +83,7 @@
              tourism_enterprise
         where complaint.sender = user.id
           and complaint.if_coped = 0
+          and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <select id="findComplaintCoped" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -90,6 +97,7 @@
              tourism_enterprise
         where complaint.sender = user.id
           and complaint.if_coped = 1
+          and complaint.enterprise_id=tourism_enterprise.id
     </select>
     <insert id="AddComplaint">
         insert into complaint (id, sender, enterprise_id, content, level, if_coped, send_date)
