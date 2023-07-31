@@ -1,0 +1,55 @@
+#k=v
+#对象
+#数组
+# 数据库连接相关的配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/shixun?characterEncoding=utf-8&&useSSL=false
+    username: root
+    password: "020904"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化大小
+      initialSize: 5
+      #最小值
+      minIdle: 5
+      #最大值
+      maxActive: 20
+      #最大等待时间，配置获取连接等待超时，时间单位都是毫秒ms
+      maxWait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 60000
+      #配置一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+  redis:
+    database: 0
+    port: 6379
+  #  host: 127.0.0.1
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 1
+        max-idle: 8
+        min-idle: 0
+    timeout: 10000
+ # thymeleaf:
+ #   suffix: .html
+  #  prefix: classpath:/templates/
+  #  cache: false
+   # encoding: UTF-8
+   # content-type: text/html
+    #mode: HTML5
+
+
+# mybatis框架相关配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.project.entity
+server:
+  port: 8080

@@ -29,13 +29,9 @@ public class TourismEnterpriseController {
         String current_people = map.get("current_people");
         String current_parking = map.get("current_parking");
         String location = map.get("location");
-        String credit = map.get("credit");
-        String img = map.get("img");
         String introduction = map.get("introduction");
         String star = map.get("star");
-        String latitude = map.get("latitude");
-        String longitude = map.get("longitude");
-        if(name.isEmpty() || capacity.isEmpty() || parking_space.isEmpty() || current_people.isEmpty() || current_parking.isEmpty() || location.isEmpty() || credit.isEmpty() || img.isEmpty() || introduction.isEmpty() || star.isEmpty() || latitude.isEmpty() || longitude.isEmpty())
+        if(name.isEmpty() || capacity.isEmpty() || parking_space.isEmpty() || current_people.isEmpty() || current_parking.isEmpty() || location.isEmpty() ||  introduction.isEmpty() || star.isEmpty() )
             return ResultUtil.fail();//各项数据不能为空，否则返回0
         TourismEnterprise tourismEnterprise=tourismEnterpriseDaoService.findTourismEnterpriseByName(name);
         if (tourismEnterprise!=null)
@@ -45,11 +41,8 @@ public class TourismEnterpriseController {
         int iparking_space=Integer.parseInt(parking_space);
         int icurrent_people=Integer.parseInt(current_people);
         int icurrent_parking=Integer.parseInt(current_parking);
-        double icredit=Double.parseDouble(credit);
         int istar=Integer.parseInt(star);
-        double dlatitude=Double.parseDouble(latitude);
-        double dlongitude=Double.parseDouble(longitude);
-        TourismEnterprise newtourismEnterprise=new TourismEnterprise(name,"1",icapacity,iparking_space,icurrent_people,icurrent_parking,location,icredit,img,introduction,istar,dlatitude,dlongitude);
+        TourismEnterprise newtourismEnterprise=new TourismEnterprise(name,"1",icapacity,iparking_space,icurrent_people,icurrent_parking,location,100.0,"https://youimg1.c-ctrip.com/target/10081f000001gqgew105A_D_10000_1200.jpg?proc=autoorient",introduction,istar,116.397128,39.916527);
         return ResultUtil.success(tourismEnterpriseDaoService.addTourismEnterprise(newtourismEnterprise));//成功返回1
     }
 
@@ -63,13 +56,9 @@ public class TourismEnterpriseController {
         String current_people = map.get("current_people");
         String current_parking = map.get("current_parking");
         String location = map.get("location");
-        String credit = map.get("credit");
-        String img = map.get("img");
         String introduction = map.get("introduction");
         String star = map.get("star");
-        String latitude = map.get("latitude");
-        String longitude = map.get("longitude");
-        if(name.isEmpty() || capacity.isEmpty() || parking_space.isEmpty() || current_people.isEmpty() || current_parking.isEmpty() || location.isEmpty() || credit.isEmpty() || img.isEmpty() || introduction.isEmpty() || star.isEmpty() || latitude.isEmpty() || longitude.isEmpty())
+        if(name.isEmpty() || capacity.isEmpty() || parking_space.isEmpty() || current_people.isEmpty() || current_parking.isEmpty() || location.isEmpty() ||  introduction.isEmpty() || star.isEmpty() )
             return ResultUtil.fail();//各项数据不能为空，否则返回0
         TourismEnterprise tourismEnterprise=tourismEnterpriseDaoService.findTourismEnterpriseByName(name);
         if (tourismEnterprise!=null)
@@ -79,11 +68,8 @@ public class TourismEnterpriseController {
         int iparking_space=Integer.parseInt(parking_space);
         int icurrent_people=Integer.parseInt(current_people);
         int icurrent_parking=Integer.parseInt(current_parking);
-        double icredit=Double.parseDouble(credit);
         int istar=Integer.parseInt(star);
-        double dlatitude=Double.parseDouble(latitude);
-        double dlongitude=Double.parseDouble(longitude);
-        TourismEnterprise newtourismEnterprise=new TourismEnterprise(name,"2",icapacity,iparking_space,icurrent_people,icurrent_parking,location,icredit,img,introduction,istar,dlatitude,dlongitude);
+        TourismEnterprise newtourismEnterprise=new TourismEnterprise(name,"2",icapacity,iparking_space,icurrent_people,icurrent_parking,location,100.0,"https://youimg1.c-ctrip.com/target/10081f000001gqgew105A_D_10000_1200.jpg?proc=autoorient",introduction,istar,116.397128,39.916527);
         return ResultUtil.success(tourismEnterpriseDaoService.addTourismEnterprise(newtourismEnterprise));//成功返回1
     }
     @PostMapping(value = "addAgency")
@@ -91,47 +77,31 @@ public class TourismEnterpriseController {
         //新增数据
     ResultUtil<Integer> addAgency(@RequestBody HashMap<String, String> map) {
         String name = map.get("name");
-        String capacity = map.get("capacity");
-        String parking_space = map.get("parking_space");
-        String current_people = map.get("current_people");
-        String current_parking = map.get("current_parking");
         String location = map.get("location");
-        String credit = map.get("credit");
-        String img = map.get("img");
         String introduction = map.get("introduction");
         String star = map.get("star");
-        String latitude = map.get("latitude");
-        String longitude = map.get("longitude");
-        if(name.isEmpty() || capacity.isEmpty() || parking_space.isEmpty() || current_people.isEmpty() || current_parking.isEmpty() || location.isEmpty() || credit.isEmpty() || img.isEmpty() || introduction.isEmpty() || star.isEmpty() || latitude.isEmpty() || longitude.isEmpty())
+        if(name.isEmpty()  || location.isEmpty() ||  introduction.isEmpty() || star.isEmpty() )
             return ResultUtil.fail();//各项数据不能为空，否则返回0
         TourismEnterprise tourismEnterprise=tourismEnterpriseDaoService.findTourismEnterpriseByName(name);
         if (tourismEnterprise!=null)
             return ResultUtil.fail(7000,"添加信息中的企业已经存在");
 
-        int icapacity=Integer.parseInt(capacity);
-        int iparking_space=Integer.parseInt(parking_space);
-        int icurrent_people=Integer.parseInt(current_people);
-        int icurrent_parking=Integer.parseInt(current_parking);
-        double icredit=Double.parseDouble(credit);
         int istar=Integer.parseInt(star);
-        double dlatitude=Double.parseDouble(latitude);
-        double dlongitude=Double.parseDouble(longitude);
-        TourismEnterprise newtourismEnterprise=new TourismEnterprise(name,"3",icapacity,iparking_space,icurrent_people,icurrent_parking,location,icredit,img,introduction,istar,dlatitude,dlongitude);
+        TourismEnterprise newtourismEnterprise=new TourismEnterprise(name,"3",5000,500,2500,250,location,100.0,"https://youimg1.c-ctrip.com/target/10081f000001gqgew105A_D_10000_1200.jpg?proc=autoorient",introduction,istar,116.397128,39.916527);
         return ResultUtil.success(tourismEnterpriseDaoService.addTourismEnterprise(newtourismEnterprise));//成功返回1
     }
 
-    @DeleteMapping(value = "deleteTourismEnterprise")
+    @DeleteMapping(value = "deleteTourismEnterprise/{id}")
     @ApiOperation("删除TourismEnterprise数据")
         //删除数据
-    ResultUtil<Integer> delete(@RequestBody HashMap<String, String> map) {
-        int id = Integer.parseInt(map.get("id"));
+    ResultUtil<Integer> delete(@PathVariable("id") int id) {
         return ResultUtil.success(tourismEnterpriseDaoService.delete(id));
     }
 
-    @PutMapping(value = "updateTourismEnterprise")
-    @ApiOperation("更新TourismEnterprise数据")
+    @PutMapping(value = "updateAttractionsAndHotels")
+    @ApiOperation("更新AttractionsAndHotels数据")
         //更新数据
-    ResultUtil<Integer> update(@RequestBody HashMap<String, String> map) {
+    ResultUtil<Integer> updateAttractionsAndHotels(@RequestBody HashMap<String, String> map) {
         int id = Integer.parseInt(map.get("id"));
         String name = map.get("name");
         String scapacity = map.get("capacity");
@@ -143,20 +113,13 @@ public class TourismEnterpriseController {
         String scurrent_parking = map.get("current_parking");
         int current_parking=Integer.parseInt(scurrent_parking);
         String location = map.get("location");
-        String scredit =map.get("credit");
-        double credit=Double.parseDouble(scredit);
-        String img = map.get("img");
         String introduction = map.get("introduction");
         String sstar = map.get("star");
         int star=Integer.parseInt(sstar);
-        String slatitude = map.get("latitude");
-        double latitude = Double.parseDouble(slatitude);
-        String slongitude = map.get("longitude");
-        double longitude = Double.parseDouble(slongitude);
         TourismEnterprise tourismEnterprise=tourismEnterpriseDaoService.findTourismEnterpriseById(id);
-        if(name.isEmpty() || scapacity.isEmpty() || sparking_space.isEmpty() || scurrent_people.isEmpty() || scurrent_parking.isEmpty() || location.isEmpty() || scredit.isEmpty() || img.isEmpty() || introduction.isEmpty() || sstar.isEmpty() || slatitude.isEmpty() || slongitude.isEmpty())
+        if(name.isEmpty() || scapacity.isEmpty() || sparking_space.isEmpty() || scurrent_people.isEmpty() || scurrent_parking.isEmpty() || location.isEmpty() || introduction.isEmpty() || sstar.isEmpty() )
             return ResultUtil.fail();//各项数据不能为空，否则返回0
-        if(tourismEnterprise.getName().equals(name)&&tourismEnterprise.getCapacity()==capacity&&tourismEnterprise.getParking_space()==parking_space&&tourismEnterprise.getCurrent_people()==current_people&&tourismEnterprise.getCurrent_parking()==current_parking&&tourismEnterprise.getLocation().equals(location)&&tourismEnterprise.getCredit()==credit&&tourismEnterprise.getImg().equals(img)&&tourismEnterprise.getIntroduction().equals(introduction)&&tourismEnterprise.getStar()==star&&tourismEnterprise.getLatitude()==latitude&&tourismEnterprise.getLongitude()==longitude)
+        if(tourismEnterprise.getName().equals(name)&&tourismEnterprise.getCapacity()==capacity&&tourismEnterprise.getParking_space()==parking_space&&tourismEnterprise.getCurrent_people()==current_people&&tourismEnterprise.getCurrent_parking()==current_parking&&tourismEnterprise.getLocation().equals(location)&&tourismEnterprise.getIntroduction().equals(introduction)&&tourismEnterprise.getStar()==star)
             return ResultUtil.fail(6000,"前后信息不变");//前后信息不变
         if(!tourismEnterprise.getName().equals(name)&&tourismEnterpriseDaoService.findTourismEnterpriseByName(name)!=null)
             return ResultUtil.fail(7000,"更改信息中的企业已经存在");
@@ -167,21 +130,41 @@ public class TourismEnterpriseController {
         tourismEnterprise.setCurrent_people(current_people);
         tourismEnterprise.setCurrent_parking(current_parking);
         tourismEnterprise.setLocation(location);
-        tourismEnterprise.setCredit(credit);
-        tourismEnterprise.setImg(img);
         tourismEnterprise.setIntroduction(introduction);
         tourismEnterprise.setStar(star);
-        tourismEnterprise.setLatitude(latitude);
-        tourismEnterprise.setLongitude(longitude);
         return ResultUtil.success(tourismEnterpriseDaoService.update(tourismEnterprise));
     }
 
-    @PostMapping (value = "findTourismEnterpriseByName")
+    @PutMapping(value = "updateAgency")
+    @ApiOperation("更新Agency数据")
+        //更新数据
+    ResultUtil<Integer> updateAgency(@RequestBody HashMap<String, String> map) {
+        int id = Integer.parseInt(map.get("id"));
+        String name = map.get("name");
+        String location = map.get("location");
+        String introduction = map.get("introduction");
+        String sstar = map.get("star");
+        int star=Integer.parseInt(sstar);
+        TourismEnterprise tourismEnterprise=tourismEnterpriseDaoService.findTourismEnterpriseById(id);
+        if(name.isEmpty() || location.isEmpty() || introduction.isEmpty() || sstar.isEmpty() )
+            return ResultUtil.fail();//各项数据不能为空，否则返回0
+        if(tourismEnterprise.getName().equals(name)&&tourismEnterprise.getLocation().equals(location)&&tourismEnterprise.getIntroduction().equals(introduction)&&tourismEnterprise.getStar()==star)
+            return ResultUtil.fail(6000,"前后信息不变");//前后信息不变
+        if(!tourismEnterprise.getName().equals(name)&&tourismEnterpriseDaoService.findTourismEnterpriseByName(name)!=null)
+            return ResultUtil.fail(7000,"更改信息中的企业已经存在");
+
+        tourismEnterprise.setName(name);
+        tourismEnterprise.setLocation(location);
+        tourismEnterprise.setIntroduction(introduction);
+        tourismEnterprise.setStar(star);
+        return ResultUtil.success(tourismEnterpriseDaoService.update(tourismEnterprise));
+    }
+
+    @GetMapping (value = "findTourismEnterpriseByName")
     @ResponseBody
     @ApiOperation("根据name查找TourismEnterprise")
         //name查找
-    Object findTourismEnterpriseByName(@RequestBody HashMap<String, String> map) {
-        String name = map.get("name");
+    Object findTourismEnterpriseByName(@RequestParam String name) {
         TourismEnterprise tourismEnterprises=tourismEnterpriseDaoService.findTourismEnterpriseByName(name);
         if(tourismEnterprises!=null)
             return ResultUtil.success(tourismEnterprises);
@@ -205,43 +188,37 @@ public class TourismEnterpriseController {
         return ResultUtil.success(tourismEnterpriseDaoService.findTotalNumberOfAgency());
     }
 
-    @PostMapping (value = "findPageAttractions")
+    @GetMapping (value = "findPageAttractions")
     @ResponseBody
     @ApiOperation("查找对应页数的Attractions")
-    Object findPageAttractions(@RequestBody HashMap<String, String> map) {
-        int index = Integer.parseInt(map.get("index"));
-        int pagesize = Integer.parseInt(map.get("pagesize"));
+    Object findPageAttractions(@RequestParam int index,@RequestParam int pagesize) {
         List<TourismEnterprise> tourismEnterprises=tourismEnterpriseDaoService.findPageAttractions(index,pagesize);
         if(!tourismEnterprises.isEmpty())
             return ResultUtil.success(tourismEnterprises);
         else return ResultUtil.fail();
     }
 
-    @PostMapping (value = "findPageHotels")
+    @GetMapping (value = "findPageHotels")
     @ResponseBody
     @ApiOperation("查找对应页数的Hotels")
-    Object findPageHotels(@RequestBody HashMap<String, String> map) {
-        int index = Integer.parseInt(map.get("index"));
-        int pagesize = Integer.parseInt(map.get("pagesize"));
+    Object findPageHotels(@RequestParam int index,@RequestParam int pagesize) {
         List<TourismEnterprise> tourismEnterprises=tourismEnterpriseDaoService.findPageHotels(index,pagesize);
         if(!tourismEnterprises.isEmpty())
             return ResultUtil.success(tourismEnterprises);
         else return ResultUtil.fail();
     }
 
-    @PostMapping (value = "findPageAgency")
+    @GetMapping (value = "findPageAgency")
     @ResponseBody
     @ApiOperation("查找对应页数的Agency")
-    Object findPageAgency(@RequestBody HashMap<String, String> map) {
-        int index = Integer.parseInt(map.get("index"));
-        int pagesize = Integer.parseInt(map.get("pagesize"));
+    Object findPageAgency(@RequestParam int index,@RequestParam int pagesize) {
         List<TourismEnterprise> tourismEnterprises=tourismEnterpriseDaoService.findPageAgency(index,pagesize);
         if(!tourismEnterprises.isEmpty())
             return ResultUtil.success(tourismEnterprises);
         else return ResultUtil.fail();
     }
 
-    @PostMapping (value = "findThreeAttractions")
+    @GetMapping (value = "findThreeAttractions")
     @ResponseBody
     @ApiOperation("查找首页三个Attractions")
     Object findThreeAttractions() {
@@ -301,12 +278,11 @@ public class TourismEnterpriseController {
         else return ResultUtil.fail();
     }
 
-    @PostMapping (value = "findTourismEnterpriseById")
+    @GetMapping (value = "findTourismEnterpriseById")
     @ResponseBody
     @ApiOperation("根据id查找TourismEnterprise")
         //id查找
-    ResultUtil<TourismEnterprise> findTourismEnterpriseById(@RequestBody HashMap<String, String> map) {
-        int id = Integer.parseInt(map.get("id"));
+    ResultUtil<TourismEnterprise> findTourismEnterpriseById(@RequestParam int id) {
         return ResultUtil.success(tourismEnterpriseDaoService.findTourismEnterpriseById(id));
     }
 
