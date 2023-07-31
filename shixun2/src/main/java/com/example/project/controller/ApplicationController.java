@@ -56,8 +56,7 @@ public class ApplicationController {
     @ApiOperation("查看用户的申请表")
     public ResultUtil findApplicationByUserId(@RequestBody  HashMap<String, String> map){
         int user_id = Integer.parseInt(map.get("user_id"));
-        Map<String,Object> res=new HashMap<>();
-
+//        Map<String,Object> res=new HashMap<>();
 //        Application a=applicationDaoService.findApplicationByUserId(user_id);
 //        User user=userDaoService.findUserById(user_id);
 //        Tourism_enterprise te=tour_enterpriseDaoService.findTourism_enterpriseById(a.getAgency_id());
@@ -96,7 +95,10 @@ public class ApplicationController {
     @ApiOperation("根据申请表的id查找申请表（管理端）")
     public ResultUtil findApplicationById(@RequestBody  HashMap<String, String> map){
         int id = Integer.parseInt(map.get("id"));
-        return ResultUtil.success(applicationDaoService.findApplicationById(id));
+        if (applicationDaoService.findApplicationById(id)!=null){
+            return ResultUtil.success(applicationDaoService.findApplicationById(id));
+        }
+        else return ResultUtil.fail(7000,"该申请表不存在",0);
     }
 
     @PostMapping(value = "reviewApplication")
@@ -107,14 +109,19 @@ public class ApplicationController {
         String if_succeed=map.get("if_succeed");
 
         Application a= applicationDaoService.findApplicationById(id);
-
-        if(applicationDaoService.reviewApplication(id,if_succeed)==1){
-            Guide guide=new Guide(a.getUser_id(),a.getAgency_id(),100,a.getInformation(),a.getAcademic_degree(),a.getSpeciality(),a.getSchool());
-
-            return ResultUtil.success(guideDaoService.addGuide(guide));
+        if(a!=null){
+            if(applicationDaoService.reviewApplication(id,if_succeed)==1){
+                Guide guide=new Guide(a.getUser_id(),a.getAgency_id(),100,a.getInformation(),a.getAcademic_degree(),a.getSpeciality(),a.getSchool());
+                return ResultUtil.success(guideDaoService.addGuide(guide));
+            }else {
+                return ResultUtil.fail(7000,"审批失败",0);
+            }
+        }else {
+            return ResultUtil.fail(7000,"该申请表不存在",0);
         }
 
-        return ResultUtil.success(applicationDaoService.reviewApplication(id,if_succeed));
+
+//        return ResultUtil.success(applicationDaoService.reviewApplication(id,if_succeed));
     }
 
     @DeleteMapping(value = "deleteApplicationById")
@@ -122,7 +129,10 @@ public class ApplicationController {
     @ApiOperation("根据id删除申请表（管理员端）")
     public ResultUtil deleteApplicationById(@RequestBody  HashMap<String, String> map){
         int id = Integer.parseInt(map.get("id"));
-        return ResultUtil.success(applicationDaoService.deleteApplicationById(id));
+        if (applicationDaoService.findApplicationById(id)!=null){
+            return ResultUtil.success(applicationDaoService.deleteApplicationById(id));
+        }
+        else return ResultUtil.fail(7000,"该申请表不存在",0);
     }
 
     @PostMapping(value = "selectApplicationByIf_succeed")

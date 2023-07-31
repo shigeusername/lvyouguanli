@@ -37,7 +37,10 @@ public class GuideController {
     @ApiOperation("根据id删除导游（管理员端）")
     public ResultUtil deleteGuideById(@RequestBody HashMap<String, String> map){
         int id = Integer.parseInt(map.get("id"));
-        return ResultUtil.success(guideDaoService.deleteGuideById(id));
+        if(guideDaoService.findGuideById(id)!=null){
+            return ResultUtil.success(guideDaoService.deleteGuideById(id));
+        }
+        else return ResultUtil.fail(7000,"该导游不存在",0);
     }
 
     @PostMapping(value = "updateGuideById")
@@ -51,7 +54,10 @@ public class GuideController {
         String speciality=map.get("speciality");
         String school =map.get("school");
         Guide guide=new Guide(id,affiliated_agency,0,information,academic_degree,speciality,school);
-        return ResultUtil.success(guideDaoService.updateGuideById(guide));
+        if(guideDaoService.findGuideById(id)!=null){
+            return ResultUtil.success(guideDaoService.updateGuideById(guide));
+        }
+        else return ResultUtil.fail(7000,"该导游不存在",0);
     }
 
     @PostMapping(value = "findGuideVaguely")
