@@ -16,7 +16,7 @@
             <if test="price_up != null">
                 AND i.price &lt; #{price_up}
             </if>
-            AND i.id NOT IN (
+            AND i.id IN (
             SELECT DISTINCT itinerary_id FROM guide
             )
         </where>

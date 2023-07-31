@@ -10,9 +10,9 @@ public class Teammate {
     private String name;//姓名
     private String gender;//性别
     private int age;//年龄
-    private int phone;//联系方式
+    private String phone;//联系方式
 
-    public Teammate(String name, String gender, int age, int phone) {
+    public Teammate(String name, String gender, int age, String phone) {
         this.name = name;
         this.gender = gender;
         this.age = age;

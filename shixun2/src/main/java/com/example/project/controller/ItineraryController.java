@@ -6,8 +6,6 @@ import com.example.project.entity.Tour_group;
 import com.example.project.entity.User;
 import com.example.project.entity.VO.*;
 import com.example.project.service.ItineraryDaoServicelmpl;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +26,12 @@ public class ItineraryController {
     ItineraryDaoServicelmpl itineraryDaoServicelmpl;
 
 
+    //旅客获取全部的旅行单信息
+    //旅行单是被导游申领过的，并且开始时间应当晚于或者等于目前时间的
     @PostMapping("/getall")
     ResultUtil getall(@RequestBody HashMap<String, String> map){
         String i_name = map.get("i_name");
+        if(i_name.equals("不限")) i_name = null;
         String time = map.get("time");
         int price_up = Integer.parseInt(map.get("price_up"));
         int price_down = Integer.parseInt(map.get("price_down"));
@@ -163,7 +164,7 @@ public class ItineraryController {
 
     //导游查看我的行程单信息
     @PostMapping("/findgitin")
-    ResultUtil indroupmate(@RequestBody HashMap<String, String> map) {
+    ResultUtil findgitin(@RequestBody HashMap<String, String> map) {
         int id = Integer.parseInt(map.get("id"));
         Tguide tguide = itineraryDaoServicelmpl.getGuideById(id);
         int i_id = tguide.getItinerary_id();
@@ -215,7 +216,8 @@ public class ItineraryController {
         return ResultUtil.success(res);
     }
 
-    //查看全部行程单信息
+    //导游查看全部行程单信息
+    //这里行程单是未被申领并且开始时间在今天之后的
     @PostMapping("/findallitinerary")
     ResultUtil findallitinerary(@RequestBody HashMap<String, String> map) {
         int pageNum = Integer.parseInt(map.get("pageNum"));

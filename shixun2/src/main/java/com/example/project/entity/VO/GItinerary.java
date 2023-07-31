@@ -1,5 +1,6 @@
 package com.example.project.entity.VO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ public class GItinerary {
     String destination;//string,终点
     int price;//价格
     String j_name;//string,景区名
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime start_time;//LocalDateTime,出发时间
     String gathering_place;// 集合地点
     int current_number;// 旅游团当前人数
