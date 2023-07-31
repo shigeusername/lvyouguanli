@@ -96,7 +96,7 @@ public class RescueVehicleController {
         return ResultUtil.success(rescueVehicleDaoService.update(rescueVehicle));
     }
 
-    @GetMapping (value = "findRescueVehicleByLicenseNumber")
+    @PostMapping (value = "findRescueVehicleByLicenseNumber")
     @ResponseBody
     @ApiOperation("根据license_number查找RescueVehicle")
         //license_number查找
@@ -108,7 +108,7 @@ public class RescueVehicleController {
         else return ResultUtil.fail();
     }
 
-    @GetMapping (value = "findRescueVehicleById")
+    @PostMapping (value = "findRescueVehicleById")
     @ResponseBody
     @ApiOperation("根据id查找RescueVehicle")
         //id查找
@@ -123,7 +123,7 @@ public class RescueVehicleController {
         return ResultUtil.success(rescueVehicleDaoService.findTotalNumber());
     }
 
-    @GetMapping (value = "findAllRescueVehicle")
+    @PostMapping (value = "findAllRescueVehicle")
     @ResponseBody
     @ApiOperation("查找对应页数的RescueVehicle")
     Object findAll(@RequestBody HashMap<String, String> map) {
@@ -135,7 +135,7 @@ public class RescueVehicleController {
         else return ResultUtil.fail();
     }
 
-    @GetMapping (value = "findRescueVehicleByAffiliatedEnterprise")
+    @PostMapping (value = "findRescueVehicleByAffiliatedEnterprise")
     @ResponseBody
     @ApiOperation("根据affiliated_enterprise查找与该企业相关的救援车辆")
         //id查找

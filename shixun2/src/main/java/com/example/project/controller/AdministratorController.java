@@ -86,7 +86,7 @@ public class AdministratorController {
         return  ResultUtil.success(administratorDaoService.update(administrator));
     }
 
-    @GetMapping (value = "findAdministratorByName")
+    @PostMapping (value = "findAdministratorByName")
     @ResponseBody
     @ApiOperation("根据name查找Administrator")
         //name查找
@@ -98,7 +98,7 @@ public class AdministratorController {
         else return ResultUtil.fail();
     }
 
-    @GetMapping (value = "findAdministratorById")
+    @PostMapping (value = "findAdministratorById")
     @ResponseBody
     @ApiOperation("根据id查找Administrator")
         //id查找
@@ -113,7 +113,7 @@ public class AdministratorController {
         return ResultUtil.success(administratorDaoService.findTotalNumber());
     }
 
-    @GetMapping (value = "findAllAdministrator")
+    @PostMapping (value = "findAllAdministrator")
     @ResponseBody
     @ApiOperation("查找对应页数的Administrator")
     Object findAll(@RequestBody HashMap<String, String> map) {
@@ -125,7 +125,7 @@ public class AdministratorController {
         else return  ResultUtil.fail();
     }
 
-    @GetMapping (value = "findAdministratorByAffiliatedEnterprise")
+    @PostMapping (value = "findAdministratorByAffiliatedEnterprise")
     @ResponseBody
     @ApiOperation("根据affiliated_enterprise查找与该企业相关的管理人员")
         //id查找

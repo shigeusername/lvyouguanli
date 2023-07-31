@@ -20,11 +20,11 @@ public class GuideController {
     @GetMapping(value = "findAllGuide")
     @ResponseBody
     @ApiOperation("查询所有导游（管理员端）")
-    public ResultUtil findAllGuide(@RequestBody HashMap<String, String> map){
+    public ResultUtil findAllGuide(){
         return ResultUtil.success(guideDaoService.findAllGuide());
     }
 
-    @GetMapping(value = "findGuideById")
+    @PostMapping(value = "findGuideById")
     @ResponseBody
     @ApiOperation("根据id查找导游（管理员端）")
     public ResultUtil findGuideById(@RequestBody HashMap<String, String> map){
@@ -54,7 +54,7 @@ public class GuideController {
         return ResultUtil.success(guideDaoService.updateGuideById(guide));
     }
 
-    @GetMapping(value = "findGuideVaguely")
+    @PostMapping(value = "findGuideVaguely")
     @ResponseBody
     @ApiOperation("模糊查询导游（管理员端）")
     public ResultUtil findGuideVaguely(@RequestBody HashMap<String, String> map){
@@ -72,7 +72,7 @@ public class GuideController {
         return ResultUtil.success(guideDaoService.guideApplyItinerary(id,itinerary_id));
     }
 
-    @GetMapping(value = "findGuideByAgency_id")
+    @PostMapping(value = "findGuideByAgency_id")
     @ResponseBody
     @ApiOperation("根据旅行社id查找导游")
     public ResultUtil findGuideByAgency_id(@RequestBody HashMap<String, String> map){

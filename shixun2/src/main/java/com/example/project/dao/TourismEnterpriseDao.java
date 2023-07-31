@@ -38,7 +38,7 @@ public interface TourismEnterpriseDao {
     //查找管理页面每一页的星级酒店信息
     List<TourismEnterprise> findPageHotels(int index, int pagesize);
     //查找管理页面每一页的旅行社信息
-    List<ConciseTourismEnterprise> findPageAgency(int index, int pagesize);
+    List<TourismEnterprise> findPageAgency(int index, int pagesize);
 
     //查找首页的旅游景区信息
     List<ConciseTourismEnterprise> findThreeAttractions();

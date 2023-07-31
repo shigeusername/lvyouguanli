@@ -39,7 +39,7 @@ public class ApplicationController {
         return ResultUtil.success(applicationDaoService.addApplication(a));
     }
 
-    @GetMapping(value = "ifSubmittedApplication")
+    @PostMapping(value = "ifSubmittedApplication")
     @ResponseBody
     @ApiOperation("用户是否提交过申请")
     public ResultUtil ifSubmittedApplication(@RequestBody  HashMap<String, String> map){
@@ -51,7 +51,7 @@ public class ApplicationController {
     }
 
     //需结合其他接口
-    @GetMapping(value = "findApplicationByUserId")
+    @PostMapping(value = "findApplicationByUserId")
     @ResponseBody
     @ApiOperation("查看用户的申请表")
     public ResultUtil findApplicationByUserId(@RequestBody  HashMap<String, String> map){
@@ -87,11 +87,11 @@ public class ApplicationController {
     @GetMapping(value = "findAllApplication")
     @ResponseBody
     @ApiOperation("查询所有申请表（管理员端）")
-    public ResultUtil<List<ApplicationVO>> findAllApplication(@RequestBody  HashMap<String, String> map){
+    public ResultUtil<List<ApplicationVO>> findAllApplication(){
         return ResultUtil.success(applicationDaoService.findAllApplication());
     }
 
-    @GetMapping(value = "findApplicationById")
+    @PostMapping(value = "findApplicationById")
     @ResponseBody
     @ApiOperation("根据申请表的id查找申请表（管理端）")
     public ResultUtil findApplicationById(@RequestBody  HashMap<String, String> map){
@@ -125,7 +125,7 @@ public class ApplicationController {
         return ResultUtil.success(applicationDaoService.deleteApplicationById(id));
     }
 
-    @GetMapping(value = "selectApplicationByIf_succeed")
+    @PostMapping(value = "selectApplicationByIf_succeed")
     @ResponseBody
     @ApiOperation("根据if_succeed筛选申请表（管理员端）")
     public ResultUtil selectApplicationByIf_succeed(@RequestBody  HashMap<String, String> map){

@@ -176,7 +176,7 @@ public class TourismEnterpriseController {
         return ResultUtil.success(tourismEnterpriseDaoService.update(tourismEnterprise));
     }
 
-    @GetMapping (value = "findTourismEnterpriseByName")
+    @PostMapping (value = "findTourismEnterpriseByName")
     @ResponseBody
     @ApiOperation("根据name查找TourismEnterprise")
         //name查找
@@ -205,7 +205,7 @@ public class TourismEnterpriseController {
         return ResultUtil.success(tourismEnterpriseDaoService.findTotalNumberOfAgency());
     }
 
-    @GetMapping (value = "findPageAttractions")
+    @PostMapping (value = "findPageAttractions")
     @ResponseBody
     @ApiOperation("查找对应页数的Attractions")
     Object findPageAttractions(@RequestBody HashMap<String, String> map) {
@@ -217,7 +217,7 @@ public class TourismEnterpriseController {
         else return ResultUtil.fail();
     }
 
-    @GetMapping (value = "findPageHotels")
+    @PostMapping (value = "findPageHotels")
     @ResponseBody
     @ApiOperation("查找对应页数的Hotels")
     Object findPageHotels(@RequestBody HashMap<String, String> map) {
@@ -229,19 +229,19 @@ public class TourismEnterpriseController {
         else return ResultUtil.fail();
     }
 
-    @GetMapping (value = "findPageAgency")
+    @PostMapping (value = "findPageAgency")
     @ResponseBody
     @ApiOperation("查找对应页数的Agency")
     Object findPageAgency(@RequestBody HashMap<String, String> map) {
         int index = Integer.parseInt(map.get("index"));
         int pagesize = Integer.parseInt(map.get("pagesize"));
-        List<ConciseTourismEnterprise> tourismEnterprises=tourismEnterpriseDaoService.findPageAgency(index,pagesize);
+        List<TourismEnterprise> tourismEnterprises=tourismEnterpriseDaoService.findPageAgency(index,pagesize);
         if(!tourismEnterprises.isEmpty())
             return ResultUtil.success(tourismEnterprises);
         else return ResultUtil.fail();
     }
 
-    @GetMapping (value = "findThreeAttractions")
+    @PostMapping (value = "findThreeAttractions")
     @ResponseBody
     @ApiOperation("查找首页三个Attractions")
     Object findThreeAttractions() {
@@ -301,7 +301,7 @@ public class TourismEnterpriseController {
         else return ResultUtil.fail();
     }
 
-    @GetMapping (value = "findTourismEnterpriseById")
+    @PostMapping (value = "findTourismEnterpriseById")
     @ResponseBody
     @ApiOperation("根据id查找TourismEnterprise")
         //id查找

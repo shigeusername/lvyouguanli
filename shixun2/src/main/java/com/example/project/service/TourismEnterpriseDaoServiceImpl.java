@@ -76,7 +76,7 @@ public class TourismEnterpriseDaoServiceImpl implements TourismEnterpriseDaoServ
     }
 
     @Override
-    public List<ConciseTourismEnterprise> findPageAgency(int index, int pagesize) {
+    public List<TourismEnterprise> findPageAgency(int index, int pagesize) {
         index=(index-1)*pagesize;
         return tourismEnterpriseDAO.findPageAgency(index,pagesize);
     }
