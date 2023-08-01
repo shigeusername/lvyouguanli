@@ -85,7 +85,7 @@ public class ComplaintController {
         String if_coped = map.get("if_coped");
         Date send_date = new Date(System.currentTimeMillis());
         String title = map.get("title");
-        tourismEnterpriseDaoService.updateCreditByComplaint(enterprise_id,0.2*level);
+        tourismEnterpriseDaoService.updateCreditByComplaint(enterprise_id, 0.2 * level);
         Complaint complaint = new Complaint(sender, enterprise_id, context, level, if_coped, send_date, title);
         return ResultUtil.success(complaintDaoService.AddComplaint(complaint));
     }
@@ -119,5 +119,14 @@ public class ComplaintController {
         String title = map.get("title");
         Complaint complaint = new Complaint(id, sender, enterprise_id, context, level, if_coped, send_date, title);
         return ResultUtil.success(complaintDaoService.UpdateComplaint(complaint));
+    }
+
+    @PostMapping(value = "ReviewComplaint")
+    @ResponseBody
+    @ApiOperation("审批投诉")
+    public ResultUtil<Integer> ReviewComplaint(@RequestBody HashMap<String, String> map) {
+        int id = Integer.parseInt(map.get("id"));
+        String if_coped = map.get("if_coped");
+        return ResultUtil.success(complaintDaoService.ReviewComplaint(id,if_coped));
     }
 }

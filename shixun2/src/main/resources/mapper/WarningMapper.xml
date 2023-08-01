@@ -93,4 +93,9 @@
         send_time=#{send_time},title=#{title}
         where id=#{id}
     </update>
+    <update id="ReviewWarning">
+        update warning
+        set need_cope=#{need_cope}
+        where id=#{id}
+    </update>
 </mapper>

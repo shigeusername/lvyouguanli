@@ -126,4 +126,9 @@
         level=#{level}, if_coped=#{if_coped}, send_date=#{send_date},title=#{title}
         where id=#{id}
     </update>
+    <update id="ReviewComplaint">
+        update complaint
+        set if_coped=#{if_coped}
+        where id=#{id}
+    </update>
 </mapper>

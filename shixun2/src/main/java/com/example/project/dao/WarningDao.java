@@ -28,4 +28,6 @@ public interface WarningDao {
     int DeleteWarningCoped();
 
     int UpdateWarning(Warning warning);
+
+    int ReviewWarning(int id, String need_cope);
 }

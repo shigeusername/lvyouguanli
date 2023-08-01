@@ -30,4 +30,6 @@ public interface ComplaintDao {
     int DeleteComplaintCoped();
 
     int UpdateComplaint(Complaint complaint);
+
+    int ReviewComplaint(int id, String if_coped);
 }

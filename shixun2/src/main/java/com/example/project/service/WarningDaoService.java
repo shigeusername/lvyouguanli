@@ -26,4 +26,6 @@ public interface WarningDaoService {
     int DeleteWarningCoped();
 
     int UpdateWarning(Warning Warning);
+
+    int ReviewWarning(int id, String need_cope);
 }

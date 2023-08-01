@@ -60,4 +60,9 @@ public class WarningDaoServiceImpl implements WarningDaoService{
     public int UpdateWarning(Warning warning) {
         return warningDao.UpdateWarning(warning);
     }
+
+    @Override
+    public int ReviewWarning(int id, String need_cope){
+        return warningDao.ReviewWarning(id,need_cope);
+    }
 }

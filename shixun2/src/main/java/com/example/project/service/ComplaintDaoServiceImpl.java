@@ -69,4 +69,9 @@ public class ComplaintDaoServiceImpl implements ComplaintDaoService {
     public int UpdateComplaint(Complaint complaint) {
         return complaintDao.UpdateComplaint(complaint);
     }
+
+    @Override
+    public int ReviewComplaint(int id, String if_coped) {
+        return complaintDao.ReviewComplaint(id,if_coped);
+    }
 }

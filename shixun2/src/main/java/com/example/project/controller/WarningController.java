@@ -91,7 +91,7 @@ public class WarningController {
 
     @PostMapping(value = "UpdateWarning")
     @ResponseBody
-    @ApiOperation("UpdateWarning")
+    @ApiOperation("更新警告")
     public ResultUtil<Integer> UpdateWarning(@RequestBody HashMap<String, String> map) {
         int id = Integer.parseInt(map.get("id"));
         String content = map.get("content");
@@ -102,4 +102,13 @@ public class WarningController {
         Warning warning = new Warning(id, content, sender, need_cope, send_time, title);
         return ResultUtil.success(warningDaoService.UpdateWarning(warning));
     }
+    @PostMapping(value = "ReviewWarning")
+    @ResponseBody
+    @ApiOperation("审批警告")
+    public ResultUtil<Integer> ReviewWarning(@RequestBody HashMap<String, String> map) {
+        int id = Integer.parseInt(map.get("id"));
+        String need_cope = map.get("need_cope");
+        return ResultUtil.success(warningDaoService.ReviewWarning(id,need_cope));
+    }
+
 }

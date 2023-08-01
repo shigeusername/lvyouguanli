@@ -5,6 +5,7 @@ import com.example.project.entity.VO.ComplaintVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public interface ComplaintDaoService {
     List<ComplaintVO> findAllComplaint();
@@ -28,4 +29,6 @@ public interface ComplaintDaoService {
     int DeleteComplaintCoped();
 
     int UpdateComplaint(Complaint complaint);
+
+    int ReviewComplaint(int id, String if_coped);
 }
