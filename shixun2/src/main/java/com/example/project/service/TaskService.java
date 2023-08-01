@@ -19,11 +19,11 @@ public class TaskService {
             List<TourismEnterprise> tourismEnterprises = tourismEnterpriseDaoService.selectAllTourismAndHotel();
             for (TourismEnterprise enterprise : tourismEnterprises) {
                 if (enterprise.getCurrent_people() * 1.0 / enterprise.getCapacity() > 0.8) {
-                    Warning warning = new Warning(enterprise.getName() + "人数已达80%", 0, "0", new Timestamp(System.currentTimeMillis()), "监控人数");
+                    Warning warning = new Warning(enterprise.getName() + "当前人数已达最大容量的80%", 0, "0", new Timestamp(System.currentTimeMillis()), "监控人数");
                     warningDaoService.AddWarning(warning);
                 }
                 if (enterprise.getCurrent_parking() * 1.0 / enterprise.getParking_space() > 0.8) {
-                    Warning warning = new Warning(enterprise.getName() + "停车人数已达80%", 0, "0", new Timestamp(System.currentTimeMillis()), "监控人数");
+                    Warning warning = new Warning(enterprise.getName() + "80%的停车位已被使用", 0, "0", new Timestamp(System.currentTimeMillis()), "监控停车位");
                     warningDaoService.AddWarning(warning);
                 }
             }
