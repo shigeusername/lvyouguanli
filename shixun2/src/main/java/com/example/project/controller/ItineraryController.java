@@ -31,7 +31,7 @@ public class ItineraryController {
     @PostMapping("/getall")
     ResultUtil getall(@RequestBody HashMap<String, String> map){
         String i_name = map.get("i_name");
-        if(i_name.equals("不限")) i_name = null;
+        System.out.println(i_name);
         String time = map.get("time");
         int price_up = Integer.parseInt(map.get("price_up"));
         int price_down = Integer.parseInt(map.get("price_down"));
@@ -52,19 +52,26 @@ public class ItineraryController {
             //System.out.println("now people :" + current_number + "  mxx: " + mxx);
             if (current_number == mxx) continue;
 
+            int f1 = 0, f2 = 0;
             //筛选日期
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate ytime = LocalDate.parse(time, formatter);
-            int f1 = ytime.compareTo(i.getStart_time().toLocalDate());
-            int f2 = ytime.compareTo(i.getEnd_time().toLocalDate());
+            if(time == ""){
+                f1 = 0;
+                f2 = 0;
+            }else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate ytime = LocalDate.parse(time, formatter);
+                f1 = ytime.compareTo(i.getStart_time().toLocalDate());
+                f2 = ytime.compareTo(i.getEnd_time().toLocalDate());
+            }
+
 
             LocalDateTime dateTime = LocalDateTime.now(); // 获取当前日期和时间
             LocalDate datenow = dateTime.toLocalDate(); // 提取日期部分
             int f3 = datenow.compareTo(i.getStart_time().toLocalDate());
 /*            System.out.println("f3" + f3);
-            System.out.println("now: "+ datenow + "  st_time: " +  i.getEnd_time());*/
+            System.out.println("now: "+ datenow + "  st_time: " +  i.getEnd_time());
             System.out.println(f1 + "   " + f2 + "  " + f3);
-            System.out.println("  st_time: " +  i.getStart_time()+ "  end_ time: " + i.getEnd_time() + "  now : " + datenow);
+            System.out.println("  st_time: " +  i.getStart_time()+ "  end_ time: " + i.getEnd_time() + "  now : " + datenow);*/
             if(f1 >= 0 && f2 <= 0 && f3 <= 0) {
                 String starting_point = i.getStarting_point();//起点
                 String destination=i.getDestination();//终点
