@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Api
@@ -286,8 +287,15 @@ public class TourismEnterpriseController {
         return ResultUtil.success(tourismEnterpriseDaoService.findTourismEnterpriseById(id));
     }
 
-
-
+    @GetMapping (value = "selectAllTourismEnterprise")
+    @ResponseBody
+    @ApiOperation("查找所有TourismEnterprise的id和name")
+    Object selectAllTourismEnterprise() {
+        List<Map<String, Object>> tourismEnterprises=tourismEnterpriseDaoService.selectAllTourismEnterprise();
+        if(!tourismEnterprises.isEmpty())
+            return ResultUtil.success(tourismEnterprises);
+        else return ResultUtil.fail();
+    }
 
 }
 

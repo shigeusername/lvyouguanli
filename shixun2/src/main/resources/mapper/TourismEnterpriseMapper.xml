@@ -85,5 +85,13 @@
         set credit=credit-#{fen} where id = #{eid}
     </update>
 
+    <resultMap id="NameAndIdOfTourismEnterprise" type="java.util.HashMap">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectAllTourismEnterprise" resultMap="NameAndIdOfTourismEnterprise" >
+        select id,name from tourism_enterprise;
+    </select>
 
 </mapper>

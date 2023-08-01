@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("TourismEnterpriseDaoServiceImpl")
 public class TourismEnterpriseDaoServiceImpl implements TourismEnterpriseDaoService{
@@ -119,4 +120,9 @@ public class TourismEnterpriseDaoServiceImpl implements TourismEnterpriseDaoServ
     //根据投诉表修改企业的诚信分数 shao
     @Override
     public int updateCreditByComplaint(int eid,double fen){return tourismEnterpriseDAO.updateCreditByComplaint(eid,fen);}
+
+    @Override
+    public List<Map<String, Object>> selectAllTourismEnterprise() {
+        return tourismEnterpriseDAO.selectAllTourismEnterprise();
+    }
 }

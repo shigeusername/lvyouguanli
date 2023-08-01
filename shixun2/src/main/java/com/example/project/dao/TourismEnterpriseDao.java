@@ -5,6 +5,7 @@ import com.example.project.entity.VO.ConciseTourismEnterprise;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface TourismEnterpriseDao {
@@ -59,4 +60,7 @@ public interface TourismEnterpriseDao {
 
     //根据投诉表修改企业的诚信分数 shao
     int updateCreditByComplaint(int eid,double fen);
+
+    //查找所有企业的名称和id
+    List<Map<String, Object>> selectAllTourismEnterprise();
 }
