@@ -125,4 +125,9 @@ public class TourismEnterpriseDaoServiceImpl implements TourismEnterpriseDaoServ
     public List<Map<String, Object>> selectAllTourismEnterprise() {
         return tourismEnterpriseDAO.selectAllTourismEnterprise();
     }
+
+    @Override
+    public List<TourismEnterprise> selectAllTourismAndHotel() {
+        return tourismEnterpriseDAO.selectAllTourismAndHotel();
+    }
 }

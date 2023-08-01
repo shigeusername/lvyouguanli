@@ -64,4 +64,6 @@ public interface TourismEnterpriseDaoService {
 
     //查找所有企业的名称和id
     List<Map<String, Object>> selectAllTourismEnterprise();
+
+    List<TourismEnterprise> selectAllTourismAndHotel();
 }

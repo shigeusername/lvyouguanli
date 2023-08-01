@@ -29,29 +29,37 @@ public interface TourismEnterpriseDao {
 
     //查找旅游景区的总数
     int findTotalNumberOfAttractions();
+
     //查找星级酒店的总数
     int findTotalNumberOfHotels();
+
     //查找旅行社的总数
     int findTotalNumberOfAgency();
 
     //查找管理页面每一页的旅游景区信息
     List<TourismEnterprise> findPageAttractions(int index, int pagesize);
+
     //查找管理页面每一页的星级酒店信息
     List<TourismEnterprise> findPageHotels(int index, int pagesize);
+
     //查找管理页面每一页的旅行社信息
     List<TourismEnterprise> findPageAgency(int index, int pagesize);
 
     //查找首页的旅游景区信息
     List<ConciseTourismEnterprise> findThreeAttractions();
+
     //查找首页的星级酒店信息
     List<ConciseTourismEnterprise> findThreeHotels();
+
     //查找首页的旅行社信息
     List<ConciseTourismEnterprise> findThreeAgency();
 
     //查找更多旅游景区信息
     List<ConciseTourismEnterprise> findAllAttractions();
+
     //查找更多星级酒店信息
     List<ConciseTourismEnterprise> findAllHotels();
+
     //查找更多旅行社信息
     List<ConciseTourismEnterprise> findAllAgency();
 
@@ -59,8 +67,11 @@ public interface TourismEnterpriseDao {
     TourismEnterprise findTourismEnterpriseById(int id);
 
     //根据投诉表修改企业的诚信分数 shao
-    int updateCreditByComplaint(int eid,double fen);
+    int updateCreditByComplaint(int eid, double fen);
 
     //查找所有企业的名称和id
     List<Map<String, Object>> selectAllTourismEnterprise();
+
+    //查找所有景区和酒店
+    List<TourismEnterprise> selectAllTourismAndHotel();
 }
