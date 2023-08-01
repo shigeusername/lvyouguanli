@@ -111,7 +111,7 @@ public class ApplicationController {
         Application a= applicationDaoService.findApplicationById(id);
         if(a!=null){
             if(applicationDaoService.reviewApplication(id,if_succeed)==1){
-                Guide guide=new Guide(a.getUser_id(),a.getAgency_id(),100,a.getInformation(),a.getAcademic_degree(),a.getSpeciality(),a.getSchool());
+                Guide guide=new Guide(a.getUser_id(),a.getAgency_id(),0,a.getInformation(),a.getAcademic_degree(),a.getSpeciality(),a.getSchool());
                 return ResultUtil.success(guideDaoService.addGuide(guide));
             }else {
                 return ResultUtil.fail(7000,"审批失败",0);
