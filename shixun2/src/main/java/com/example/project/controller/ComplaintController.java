@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class ComplaintController {
     @Autowired
     ComplaintDaoServiceImpl complaintDaoService;
+    @Autowired
     TourismEnterpriseDaoService tourismEnterpriseDaoService;
 
     @PostMapping(value = "findAllComplaint")

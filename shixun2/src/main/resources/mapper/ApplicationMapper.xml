@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.project.dao.ApplicationDao">
      <insert id="addApplication" parameterType="com.example.project.entity.Application">
-        insert application (user_id,content,if_succeed,agency_id,information,academic_degree,speciality,school)
+        insert into application (user_id,content,if_succeed,agency_id,information,academic_degree,speciality,school)
         values (#{user_id}, #{content},'0',#{agency_id},#{information},#{academic_degree},#{speciality},#{school});
     </insert>
    <select id="ifSubmittedApplication" resultType="boolean">

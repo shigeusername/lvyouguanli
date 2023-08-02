@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.project.dao.GuideDao">
     <insert id="addGuide" parameterType="com.example.project.entity.Guide">
-        insert guide (id,information,affiliated_agency,itinerary_id,academic_degree,speciality,school)
+        insert into guide (id,information,affiliated_agency,itinerary_id,academic_degree,speciality,school)
         values (#{id},#{information},#{affiliated_agency},0,#{academic_degree},#{speciality},#{school});
     </insert>
 <!--      仍有疑问-->
