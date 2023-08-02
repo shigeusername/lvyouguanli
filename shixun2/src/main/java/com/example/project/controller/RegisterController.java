@@ -24,9 +24,9 @@ public class RegisterController {
     @RequestMapping(value = "user/register")
     @ResponseBody
     @ApiOperation("注册")
-    
+
     public ResultUtil register(@RequestBody HashMap<String,String> map) {
-        String sname = map.get("name");
+        String name = map.get("name");
         String password = map.get("password");
         String account = map.get("account");
         if(userDaoService.findExistByAccount(account) != null) {
@@ -34,8 +34,7 @@ public class RegisterController {
         }else {
             String salt = RandomUtil.randomString(10);
             String finalPassword = MD5Util.formPassToDBPass(password, salt);
-            User user = new User(account, finalPassword,sname,salt);
-            userDaoService.add(user);
+            userDaoService.add(account, finalPassword,name,salt, 0);
             return ResultUtil.success(1);
         }
     }

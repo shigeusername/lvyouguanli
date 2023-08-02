@@ -5,9 +5,9 @@
         select *
         from user;
     </select>
-    <insert id="add" parameterType="com.example.project.entity.User">
-        insert user (account, password, name,salt)
-        values (#{account}, #{password}, #{sname}, #{salt});
+    <insert id="add">
+        insert user (account, password, name, salt, type)
+        values (#{account}, #{password}, #{name}, #{salt} ,#{type});
     </insert>
     <delete id="delete" parameterType="java.lang.Integer">
         delete
@@ -59,5 +59,15 @@
     <select id="findSaltById" resultType="string">
         select salt from user
         where id = #{id}
+    </select>
+
+    <select id="findTypeById" resultType="int">
+        select type from user
+        where id = #{id}
+    </select>
+
+    <select id="findNameByAccount" resultType="string">
+        select name from user
+        where Account = #{Account}
     </select>
 </mapper>

@@ -10,7 +10,7 @@ public interface UserDaoService {
     List<User> findAll();
 
     //新增数据
-    int add(User user);
+    int add(String account, String password, String name, String salt, int type);
 
     //删除数据
     int delete(int sid);
@@ -38,4 +38,10 @@ public interface UserDaoService {
 
     //通过id查salt
     String findSaltById(int id);
+
+    //根据id查type
+    int findTypeById(int id);
+
+    //根据account查name
+    String findNameByAccount(String account);
 }

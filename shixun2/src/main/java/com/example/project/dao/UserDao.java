@@ -13,7 +13,7 @@ public interface UserDao {
     List<User> findAll();
 
     //新增数据
-    int add(User user);
+    int add(String account, String password, String name, String salt, int type);
 
     //删除数据
     Integer delete(Integer sid);
@@ -41,5 +41,11 @@ public interface UserDao {
 
     //通过id查salt
     String findSaltById(int id);
+
+    //通过id查type
+    int findTypeById(int id);
+
+    //根据account查name
+    String findNameByAccount(String account);
 
 }

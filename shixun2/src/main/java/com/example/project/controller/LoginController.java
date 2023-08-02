@@ -67,26 +67,31 @@ public class LoginController {
                     response.setHeader("id", String.valueOf(user.getId()));
                     // response.sendRedirect("index.html");
                     int type = userDaoService.findTypeByAccount(account);
+                    String name = userDaoService.findNameByAccount(account);
                     Map<String, Object> res = new HashMap<>();
                     res.put("flag", 1);
                     res.put("type",type);
+                    res.put("name",name);
                     return ResultUtil.success(res);// 登陆成功
                 } else {
                     Map<String, Object> res = new HashMap<>();
                     res.put("flag", 2);
                     res.put("type",3);
+                    res.put("name","wrong");
                     return ResultUtil.success(res);//密码错误
                 }
             } else {
                 Map<String, Object> res = new HashMap<>();
                 res.put("flag", 3);
                 res.put("type",3);
+                res.put("name","wrong");
                 return ResultUtil.success(res);//用户名无
             }
         }else {
             Map<String, Object> res = new HashMap<>();
             res.put("flag", 0);
             res.put("type",3);
+            res.put("name","wrong");
             return ResultUtil.success(res);//验证码错误
         }
     }
