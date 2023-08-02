@@ -42,7 +42,7 @@ public class ItineraryController {
         List<Alliten> Ai = new ArrayList<>();
         Map<String, Object> res = new HashMap<>();
         for (Itinerary i:Li){
-            int s = i.getAffiliated_agency();
+            int s = i.getScenic_spot();
             String name = itineraryDaoServicelmpl.findjbyid(s);
 
             //若预约人数已达上限，则不予显示
@@ -68,21 +68,20 @@ public class ItineraryController {
             LocalDateTime dateTime = LocalDateTime.now(); // 获取当前日期和时间
             LocalDate datenow = dateTime.toLocalDate(); // 提取日期部分
             int f3 = datenow.compareTo(i.getStart_time().toLocalDate());
-/*            System.out.println("f3" + f3);
-            System.out.println("now: "+ datenow + "  st_time: " +  i.getEnd_time());
-            System.out.println(f1 + "   " + f2 + "  " + f3);
-            System.out.println("  st_time: " +  i.getStart_time()+ "  end_ time: " + i.getEnd_time() + "  now : " + datenow);*/
+            System.out.println(f3+ "   " + i.getStart_time());
             if(f1 >= 0 && f2 <= 0 && f3 <= 0) {
                 String starting_point = i.getStarting_point();//起点
                 String destination=i.getDestination();//终点
                 String t_name=name;//景区名
 
                 LocalDateTime start_time=i.getStart_time();//出发时间
-
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                // Convert the LocalDateTime object to a string using the formatter
+                String start_time0 = start_time.format(formatter);
 
                 int price=i.getPrice();//价格
                 int id = i.getId();
-                Alliten alliten = new Alliten(starting_point,destination, t_name,start_time,price,id);
+                Alliten alliten = new Alliten(starting_point,destination, t_name,start_time0,price,id);
                 Ai.add(alliten);
             }else continue;
         }
@@ -105,6 +104,10 @@ public class ItineraryController {
         int s = itinerary.getAffiliated_agency();
         String j_name = itineraryDaoServicelmpl.findjbyid(s);//景区名
         LocalDateTime start_time = itinerary.getStart_time();//出发时间
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // Convert the LocalDateTime object to a string using the formatter
+        String start_time0 = start_time.format(formatter);
+
         int price = itinerary.getPrice();//价格
         String gathering_place = itinerary.getGathering_place();//集合地点
         String starting_point = itinerary.getStarting_point();//起点
@@ -114,7 +117,7 @@ public class ItineraryController {
         int current_number = itineraryDaoServicelmpl.countTGById(id);//旅游团当前人数
         int maximum = itinerary.getMaximum();//旅游团上线人数
         String g_name = itineraryDaoServicelmpl.findGNById(id);//导游
-        Xitin xitin = new Xitin(j_name,start_time,price,gathering_place,starting_point,destination,accommodation,schedule,current_number,maximum,g_name);
+        Xitin xitin = new Xitin(j_name,start_time0,price,gathering_place,starting_point,destination,accommodation,schedule,current_number,maximum,g_name);
         return ResultUtil.success(xitin);
     }
 
@@ -145,13 +148,16 @@ public class ItineraryController {
             int s = itinerary.getAffiliated_agency();
             String j_name = itineraryDaoServicelmpl.findjbyid(s);//景区名
             LocalDateTime start_time = itinerary.getStart_time();//出发时间
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            // Convert the LocalDateTime object to a string using the formatter
+            String start_time0 = start_time.format(formatter);
             int price = itinerary.getPrice();//价格
-            MyReserve myReserve = new MyReserve(starting_point,destination,j_name,start_time,price,id);
+            MyReserve myReserve = new MyReserve(starting_point,destination,j_name,start_time0,price,id);
             LMi.add(myReserve);
         }
         int size = LMi.size();
         List<MyReserve> RLMi= new ArrayList<>();
-        if(pageSize >= size && pageNum == 1) RLMi = LMi;//这里逻辑比较抽象
+        if(pageSize >= size && pageNum == 1) RLMi = LMi;
         else if (pageNum * pageSize > size ) RLMi = LMi.subList((pageNum - 1) * pageSize,size);   // 提取新的List对象
         else RLMi = LMi.subList((pageNum - 1) * pageSize,pageNum * pageSize);
         Map<String, Object> res = new HashMap<>();
@@ -185,6 +191,9 @@ public class ItineraryController {
         int price = itinerary.getPrice();//价格
         String j_name = sinformation.getName();//string,景区名
         LocalDateTime start_time = itinerary.getStart_time();//LocalDateTime,出发时间
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // Convert the LocalDateTime object to a string using the formatter
+        String start_time0 = start_time.format(formatter);
         LocalDateTime dateTime = LocalDateTime.now(); // 获取当前日期和时间
         LocalDate datenow = dateTime.toLocalDate(); // 提取日期部分
         int f3 = datenow.compareTo(itinerary.getEnd_time().toLocalDate());
@@ -193,7 +202,7 @@ public class ItineraryController {
         String gathering_place = itinerary.getGathering_place();// 集合地点
         int current_number = itineraryDaoServicelmpl.countTGById(i_id);// 旅游团当前人数
         int maximum = itinerary.getMaximum();// 旅游团上限人数
-        GItinerary gItinerary = new GItinerary(g_id,u_id,img,starting_point,destination,price,j_name,start_time,gathering_place,current_number,maximum);
+        GItinerary gItinerary = new GItinerary(g_id,u_id,img,starting_point,destination,price,j_name,start_time0,gathering_place,current_number,maximum);
         return ResultUtil.success(gItinerary);
     }
 
@@ -219,7 +228,6 @@ public class ItineraryController {
         Map<String, Object> res = new HashMap<>();
         res.put("size", size);
         res.put("information",RLTi);
-
         return ResultUtil.success(res);
     }
 
@@ -237,7 +245,16 @@ public class ItineraryController {
             int f3 = datenow.compareTo(itinerary.getStart_time().toLocalDate());
             if(f3 > 0) continue;
             String name = itineraryDaoServicelmpl.findjbyid(itinerary.getScenic_spot());
-            Allgi allgi = new Allgi(name, itinerary.getStarting_point(), itinerary.getDestination(), itinerary.getStart_time(),itinerary.getEnd_time(),itinerary.getSchedule(),itinerary.getId());
+            LocalDateTime start_time = itinerary.getStart_time();//LocalDateTime,出发时间
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            // Convert the LocalDateTime object to a string using the formatter
+            String start_time0 = start_time.format(formatter);
+
+            LocalDateTime end_time = itinerary.getEnd_time();//LocalDateTime,出发时间
+            // Convert the LocalDateTime object to a string using the formatter
+            String end_time0 = start_time.format(formatter);
+
+            Allgi allgi = new Allgi(name, itinerary.getStarting_point(), itinerary.getDestination(), start_time0,end_time0,itinerary.getSchedule(),itinerary.getId());
             Alli.add(allgi);
         }
         int size = Alli.size();
