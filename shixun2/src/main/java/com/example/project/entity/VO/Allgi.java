@@ -13,14 +13,12 @@ public class Allgi {
     private String t_name;//景区名称
     private String starting_point;//起点
     private String destination;//终点
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime start_time;//出发时间
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime end_time;//结束时间
+    private String start_time;//出发时间
+    private String end_time;//结束时间
     private String schedule;//活动
     private int i_id; //行程单id
 
-    public Allgi(String t_name, String starting_point, String destination, LocalDateTime start_time, LocalDateTime end_time, String schedule, int i_id) {
+    public Allgi(String t_name, String starting_point, String destination, String start_time, String end_time, String schedule, int i_id) {
         this.t_name = t_name;
         this.starting_point = starting_point;
         this.destination = destination;

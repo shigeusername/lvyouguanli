@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Xitin {
     private String j_name;//景区名
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime start_time;//出发时间
+
+    private String start_time;//出发时间
     private int price;//价格
     private String gathering_place;//集合地点
     private String starting_point;//起点
@@ -24,7 +24,7 @@ public class Xitin {
     private int maximum;//旅游团上限人数
     private String g_name;//导游
 
-    public Xitin(String j_name, LocalDateTime start_time, int price, String gathering_place, String starting_point, String destination, String accommodation, String schedule, int current_number, int maximum, String g_name) {
+    public Xitin(String j_name, String start_time, int price, String gathering_place, String starting_point, String destination, String accommodation, String schedule, int current_number, int maximum, String g_name) {
         this.j_name = j_name;
         this.start_time = start_time;
         this.price = price;

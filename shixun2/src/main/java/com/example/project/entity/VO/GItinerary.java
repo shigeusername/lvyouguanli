@@ -16,13 +16,12 @@ public class GItinerary {
     String destination;//string,终点
     int price;//价格
     String j_name;//string,景区名
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    LocalDateTime start_time;//LocalDateTime,出发时间
+    String start_time;//LocalDateTime,出发时间
     String gathering_place;// 集合地点
     int current_number;// 旅游团当前人数
     int maximum;// 旅游团上限人数
 
-    public GItinerary(String g_id, int u_id, String img, String starting_point, String destination, int price, String j_name, LocalDateTime start_time, String gathering_place, int current_number, int maximum) {
+    public GItinerary(String g_id, int u_id, String img, String starting_point, String destination, int price, String j_name, String start_time, String gathering_place, int current_number, int maximum) {
         this.g_id = g_id;
         this.u_id = u_id;
         this.img = img;
