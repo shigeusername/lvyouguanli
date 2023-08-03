@@ -70,4 +70,9 @@
         select name from user
         where Account = #{Account}
     </select>
+    <update id="updateTypeByApplication" >
+        update user
+        set type = #{type}
+        where id = #{user_id}
+    </update>
 </mapper>

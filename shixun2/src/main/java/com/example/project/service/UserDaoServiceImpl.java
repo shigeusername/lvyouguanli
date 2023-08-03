@@ -71,4 +71,8 @@ public class UserDaoServiceImpl implements UserDaoService {
 
     @Override
     public String findNameByAccount(String account){return userDao.findNameByAccount(account);}
+
+    //根据审批结果改变user的type
+    @Override
+    public int updateTypeByApplication(int user_id,String type){return userDao.updateTypeByApplication(user_id,type);}
 }

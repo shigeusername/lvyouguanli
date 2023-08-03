@@ -48,4 +48,6 @@ public interface UserDao {
     //根据account查name
     String findNameByAccount(String account);
 
+    //根据审批结果改变user的type
+    int updateTypeByApplication(int user_id,String type);
 }

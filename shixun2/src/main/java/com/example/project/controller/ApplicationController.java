@@ -7,6 +7,7 @@ import com.example.project.entity.Guide;
 import com.example.project.entity.VO.ApplicationVO;
 import com.example.project.service.ApplicationDaoServiceImpl;
 import com.example.project.service.GuideDaoServiceImpl;
+import com.example.project.service.UserDaoServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class ApplicationController {
     ApplicationDaoServiceImpl applicationDaoService;
     @Autowired
     GuideDaoServiceImpl guideDaoService;
+    @Autowired
+    UserDaoServiceImpl userDaoService;
 
     @PostMapping(value = "addApplication")
     @ResponseBody
@@ -116,10 +119,12 @@ public class ApplicationController {
                     if(guideDaoService.findGuideById(a.getUser_id())!=null){
                         return  ResultUtil.fail(7000,"该用户已成为导游");
                     }else {
+                        userDaoService.updateTypeByApplication(a.getUser_id(),"2");
                         return ResultUtil.success(guideDaoService.addGuide(guide));
                     }
                 }else {
                     if(guideDaoService.findGuideById(a.getUser_id())!=null){
+                        userDaoService.updateTypeByApplication(a.getUser_id(),"0");
                         return ResultUtil.success(guideDaoService.deleteGuideById(a.getUser_id()));
                     }else {
                         return ResultUtil.success(1);
