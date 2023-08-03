@@ -111,8 +111,16 @@ public class ApplicationController {
         Application a= applicationDaoService.findApplicationById(id);
         if(a!=null){
             if(applicationDaoService.reviewApplication(id,if_succeed)==1){
-                Guide guide=new Guide(a.getUser_id(),a.getAgency_id(),0,a.getInformation(),a.getAcademic_degree(),a.getSpeciality(),a.getSchool());
-                return ResultUtil.success(guideDaoService.addGuide(guide));
+                if(if_succeed.equals("1")){
+                    Guide guide=new Guide(a.getUser_id(),a.getAgency_id(),0,a.getInformation(),a.getAcademic_degree(),a.getSpeciality(),a.getSchool());
+                    if(guideDaoService.findGuideById(a.getUser_id())!=null){
+                        return  ResultUtil.fail(7000,"该用户已成为导游");
+                    }else {
+                        return ResultUtil.success(guideDaoService.addGuide(guide));
+                    }
+                }else {
+                    return ResultUtil.success(guideDaoService.deleteGuideById(a.getUser_id()));
+                }
             }else {
                 return ResultUtil.fail(7000,"审批失败",0);
             }
