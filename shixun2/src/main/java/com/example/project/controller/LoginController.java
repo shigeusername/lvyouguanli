@@ -47,15 +47,14 @@ public class LoginController {
         //验证码匹配
         String validateCodeRedis = (String) redisUtil.get(validateKey);
 
-        if (validateCodeRedis.equals(validateCode)) {
-            //查找用户
+        if (validateCodeRedis.equals(validateCode)) {//匹配验证码
             userDaoService.findUserByAccount(account);
             User user = userDaoService.findUserByAccount(account);
-            if (user != null) {
+            if (user != null) {//查看用户是否存在
                 //查找成功
                 String salt = user.getSalt();
                 String finalPassword = MD5Util.formPassToDBPass(password, salt);
-                if (finalPassword.equals(user.getPassword())) {
+                if (finalPassword.equals(user.getPassword())) {//匹配用户密码
                     Map<String,String> payload=new HashMap<>();
                     payload.put("account",account);
                     payload.put("password",password);
