@@ -18,8 +18,9 @@ public class UserDaoServiceImpl implements UserDaoService {
     }
 
     @Override
-    public int add(User user) {
-        return userDao.add(user);
+    public int add(String account, String password, String name, String salt, int type) {
+        System.out.println(name + "   " + password + " " + account);
+        return userDao.add(account, password, name, salt, type);
     }
 
     @Override
@@ -33,8 +34,8 @@ public class UserDaoServiceImpl implements UserDaoService {
     }
 
     @Override
-    public User findUserByName(String sname) {
-        return userDao.findUserByName(sname);
+    public User findUserByName(String name) {
+        return userDao.findUserByName(name);
     }
 
     @Override
@@ -64,4 +65,10 @@ public class UserDaoServiceImpl implements UserDaoService {
     public String findSaltById(int id){
         return userDao.findSaltById(id);
     }
+
+    @Override
+    public int findTypeById(int id){return userDao.findTypeById(id);}
+
+    @Override
+    public String findNameByAccount(String account){return userDao.findNameByAccount(account);}
 }
