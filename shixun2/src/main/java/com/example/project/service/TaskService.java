@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 public class TaskService {
-
     @Async("taskExecutor")
     public void doTask(TourismEnterpriseDaoServiceImpl tourismEnterpriseDaoService, WarningDaoServiceImpl warningDaoService) throws Exception {
         while (true){
