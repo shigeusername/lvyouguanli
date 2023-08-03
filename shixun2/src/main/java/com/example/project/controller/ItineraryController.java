@@ -101,7 +101,7 @@ public class ItineraryController {
     ResultUtil findxjbyid(@RequestBody HashMap<String, String> map){
         int id = Integer.parseInt(map.get("id"));
         Itinerary itinerary = itineraryDaoServicelmpl.findxjbyid(id);
-        int s = itinerary.getAffiliated_agency();
+        int s = itinerary.getScenic_spot();
         String j_name = itineraryDaoServicelmpl.findjbyid(s);//景区名
         LocalDateTime start_time = itinerary.getStart_time();//出发时间
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -145,9 +145,13 @@ public class ItineraryController {
             Itinerary itinerary = itineraryDaoServicelmpl.findxjbyid(id);
             String starting_point = itinerary.getStarting_point();//起点
             String destination = itinerary.getDestination();//终点
-            int s = itinerary.getAffiliated_agency();
+            int s = itinerary.getScenic_spot();
             String j_name = itineraryDaoServicelmpl.findjbyid(s);//景区名
             LocalDateTime start_time = itinerary.getStart_time();//出发时间
+            LocalDateTime dateTime = LocalDateTime.now(); // 获取当前日期和时间
+            LocalDate datenow = dateTime.toLocalDate(); // 提取日期部分
+            int f3 = datenow.compareTo(itinerary.getEnd_time().toLocalDate());
+            if(f3 > 0) continue;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             // Convert the LocalDateTime object to a string using the formatter
             String start_time0 = start_time.format(formatter);
@@ -229,7 +233,7 @@ public class ItineraryController {
 
         int size = LTi.size();
         List<Teammate> RLTi= new ArrayList<>();
-        if(pageSize >= size && pageNum == 1) RLTi = LTi;//这里逻辑比较抽象
+        if(pageSize >= size && pageNum == 1) RLTi = LTi;
         else if (pageNum * pageSize > size ) RLTi = LTi.subList((pageNum - 1) * pageSize,size);   // 提取新的List对象
         else RLTi = LTi.subList((pageNum - 1) * pageSize,pageNum * pageSize);
         Map<String, Object> res = new HashMap<>();
@@ -266,7 +270,7 @@ public class ItineraryController {
         }
         int size = Alli.size();
         List<Allgi> RAlli= new ArrayList<>();
-        if(pageSize >= size && pageNum == 1) RAlli = Alli;//这里逻辑比较抽象
+        if(pageSize >= size && pageNum == 1) RAlli = Alli;
         else if (pageNum * pageSize > size ) RAlli = Alli.subList((pageNum - 1) * pageSize,size);   // 提取新的List对象
         else RAlli = Alli.subList((pageNum - 1) * pageSize,pageNum * pageSize);
         Map<String, Object> res = new HashMap<>();
