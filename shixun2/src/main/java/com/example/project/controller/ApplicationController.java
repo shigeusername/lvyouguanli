@@ -119,7 +119,11 @@ public class ApplicationController {
                         return ResultUtil.success(guideDaoService.addGuide(guide));
                     }
                 }else {
-                    return ResultUtil.success(guideDaoService.deleteGuideById(a.getUser_id()));
+                    if(guideDaoService.findGuideById(a.getUser_id())!=null){
+                        return ResultUtil.success(guideDaoService.deleteGuideById(a.getUser_id()));
+                    }else {
+                        return ResultUtil.success(1);
+                    }
                 }
             }else {
                 return ResultUtil.fail(7000,"审批失败",0);
