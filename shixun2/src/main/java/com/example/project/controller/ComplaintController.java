@@ -81,13 +81,13 @@ public class ComplaintController {
     public ResultUtil AddComplaint(@RequestBody HashMap<String, String> map) {
         int sender = Integer.parseInt(map.get("sender"));
         int enterprise_id = Integer.parseInt(map.get("enterprise_id"));
-        String context = map.get("context");
+        String content = map.get("content");
         int level = Integer.parseInt(map.get("level"));
         String if_coped = map.get("if_coped");
         Date send_date = new Date(System.currentTimeMillis());
         String title = map.get("title");
         tourismEnterpriseDaoService.updateCreditByComplaint(enterprise_id, 0.2 * level);
-        Complaint complaint = new Complaint(sender, enterprise_id, context, level, if_coped, send_date, title);
+        Complaint complaint = new Complaint(sender, enterprise_id, content, level, if_coped, send_date, title);
         return ResultUtil.success(complaintDaoService.AddComplaint(complaint));
     }
 

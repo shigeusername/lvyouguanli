@@ -13,7 +13,7 @@ public class ComplaintVO {
     int id;
     String  sender;
     String enterprise;
-    String context;
+    String content;
     int level;
     String if_coped;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
