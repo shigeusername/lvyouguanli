@@ -22,7 +22,7 @@ public interface UserDao {
     User findUserById(Integer sid);
 
     //根据name查找
-    User findUserByName(String sname);
+    User findUserByName(String name);
 
     //查找是否存在账户
     Boolean findExistByAccount(String account);

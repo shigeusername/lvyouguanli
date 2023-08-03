@@ -22,7 +22,7 @@
     <select id="findUserByName" resultType="com.example.project.entity.User">
         select *
         from user
-        where name = #{sname};
+        where name = #{name};
     </select>
     <select id="findExistByAccount" resultType="java.lang.Boolean" parameterType="java.lang.String">
         select 1

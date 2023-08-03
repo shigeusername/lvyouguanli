@@ -34,8 +34,8 @@ public class UserDaoServiceImpl implements UserDaoService {
     }
 
     @Override
-    public User findUserByName(String sname) {
-        return userDao.findUserByName(sname);
+    public User findUserByName(String name) {
+        return userDao.findUserByName(name);
     }
 
     @Override

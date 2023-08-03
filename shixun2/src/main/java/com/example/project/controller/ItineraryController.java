@@ -181,7 +181,14 @@ public class ItineraryController {
         int id = Integer.parseInt(map.get("id"));
         Tguide tguide = itineraryDaoServicelmpl.getGuideById(id);
         int i_id = tguide.getItinerary_id();
-        Itinerary itinerary = itineraryDaoServicelmpl.findxjbyid(id);
+        System.out.println(i_id);
+        if (i_id == 0) {
+            Map<String, Object> res = new HashMap<>();
+            res.put("g_id", id);
+            res.put("u_id",tguide.getInformation());
+            return ResultUtil.success(res);
+        }
+        Itinerary itinerary = itineraryDaoServicelmpl.findxjbyid(i_id);
         Sinformation sinformation = itineraryDaoServicelmpl.findTNameImgById(itinerary.getScenic_spot());
         String g_id = tguide.getInformation();//导游证编号
         int u_id = id;//导游本身的用户编号
