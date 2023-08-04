@@ -30,7 +30,11 @@ public class TaskController {
         //这里会执行你开启的任务 然后业务是在后台运行的
         taskService.doTask(tourismEnterpriseDaoService,warningDaoService);
     }
-    //这里我们可以通过接口实时观看效果 具体效果如下图
+    @GetMapping("close")
+    public void close()
+    {
+        taskService.closeTask();
+    }    //这里我们可以通过接口实时观看效果 具体效果如下图
     @GetMapping("start/asyncExceutor")
     public Map getThreadInfo() {
         Map map = new HashMap();

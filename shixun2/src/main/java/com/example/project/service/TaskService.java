@@ -10,9 +10,13 @@ import java.util.List;
 
 @Service
 public class TaskService {
+
+    public Boolean Flag = true;
+
     @Async("taskExecutor")
     public void doTask(TourismEnterpriseDaoServiceImpl tourismEnterpriseDaoService, WarningDaoServiceImpl warningDaoService) throws Exception {
-        while (true){
+        this.Flag = true;
+        while (Flag) {
             System.out.println("开始做任务");
             long start = System.currentTimeMillis();
             List<TourismEnterprise> tourismEnterprises = tourismEnterpriseDaoService.selectAllTourismAndHotel();
@@ -29,6 +33,14 @@ public class TaskService {
             long end = System.currentTimeMillis();
             Thread.sleep(10000);
             System.out.println("完成任务耗时：" + (end - start) / 1000 + "秒");
+            System.out.println(Flag);
         }
+        System.out.println(("结束"));
     }
+
+    @Async("taskExecutor")
+    public void closeTask() {
+        this.Flag = false;
+    }
+
 }
