@@ -41,8 +41,8 @@ public class ApplicationDaoServiceImpl implements ApplicationDaoService{
 
     //查询所有申请表（管理员端）
     @Override
-    public List<ApplicationVO> findAllApplication() {
-        return applicationDao.findAllApplication();
+    public List<ApplicationVO> findAllApplication(int pageNum,int pageSize) {
+        return applicationDao.findAllApplication(pageNum,pageSize);
     }
 
     //根据申请表的id查找申请表（管理端）
@@ -63,5 +63,13 @@ public class ApplicationDaoServiceImpl implements ApplicationDaoService{
 
     //根据if_succeed筛选申请表
     @Override
-    public List<ApplicationVO> selectApplicationByIf_succeed(String if_succeed){return applicationDao.selectApplicationByIf_succeed(if_succeed);}
+    public List<ApplicationVO> selectApplicationByIf_succeed(String if_succeed,int pageNum,int pageSize){return applicationDao.selectApplicationByIf_succeed(if_succeed,pageNum,pageSize);}
+
+    //查询所有申请表的数量
+    @Override
+    public int findNumOfAllApplication(){return applicationDao.findNumOfAllApplication();}
+
+    //查询if_succeed=？的申请表的数量
+    @Override
+    public int findNumOfApplicationByIf_succeed(String if_succeed){return applicationDao.findNumOfApplicationByIf_succeed(if_succeed);};
 }

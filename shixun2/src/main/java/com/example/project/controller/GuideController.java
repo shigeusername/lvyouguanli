@@ -3,6 +3,7 @@ package com.example.project.controller;
 import com.example.project.common.ResultUtil;
 import com.example.project.entity.Application;
 import com.example.project.entity.Guide;
+import com.example.project.entity.VO.GuideVO;
 import com.example.project.service.GuideDaoServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @Api
@@ -17,11 +20,21 @@ public class GuideController {
     @Autowired
     GuideDaoServiceImpl guideDaoService;
 
-    @GetMapping(value = "findAllGuide")
+    @PostMapping(value = "findAllGuide")
     @ResponseBody
     @ApiOperation("查询所有导游（管理员端）")
-    public ResultUtil findAllGuide(){
-        return ResultUtil.success(guideDaoService.findAllGuide());
+    public ResultUtil findAllGuide(@RequestBody HashMap<String, String> map){
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum=(pageNum-1)*pageSize;
+
+        int size=guideDaoService.findNumOfAllGuide();
+        List<GuideVO> gvo=guideDaoService.findAllGuide(pageNum,pageSize);
+        System.out.println("pageNum"+pageNum+"   "+"pageSize"+pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size",size);
+        res.put("information",gvo);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findGuideById")
@@ -83,6 +96,15 @@ public class GuideController {
     @ApiOperation("根据旅行社id查找导游")
     public ResultUtil findGuideByAgency_id(@RequestBody HashMap<String, String> map){
         int agency_id = Integer.parseInt(map.get("agency_id"));
-        return ResultUtil.success(guideDaoService.findGuideByAgency_id(agency_id));
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum=(pageNum-1)*pageSize;
+
+        int size=guideDaoService.findNumOfGuideByAgency_id(agency_id);
+        List<GuideVO> gvo=guideDaoService.findGuideByAgency_id(agency_id,pageNum,pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size",size);
+        res.put("information",gvo);
+        return ResultUtil.success(res);
     }
 }

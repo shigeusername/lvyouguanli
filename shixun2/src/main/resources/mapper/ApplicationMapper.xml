@@ -24,7 +24,8 @@
    <select id="findAllApplication" resultType="com.example.project.entity.VO.ApplicationVO">
             select application.*,user.name as user_name ,user.phone as user_phone ,tourism_enterprise.name as agency_name
             from application,user,tourism_enterprise
-            where user_id =user.id and tourism_enterprise.id=agency_id;
+            where user_id =user.id and tourism_enterprise.id=agency_id
+            limit #{pageNum},#{pageSize};
         </select>
   <select id="findApplicationById" resultType="com.example.project.entity.VO.ApplicationVO">
             select application.*,user.name as user_name ,user.phone as user_phone ,tourism_enterprise.name as agency_name
@@ -44,6 +45,17 @@
   <select id="selectApplicationByIf_succeed" resultType="com.example.project.entity.VO.ApplicationVO">
           select application.*,user.name as user_name ,user.phone as user_phone ,tourism_enterprise.name as agency_name
           from application,user,tourism_enterprise
-          where application.if_succeed=#{if_succeed} and application.user_id =user.id and tourism_enterprise.id=agency_id;
+          where application.if_succeed=#{if_succeed} and application.user_id =user.id and tourism_enterprise.id=agency_id
+          limit #{pageNum},#{pageSize};
       </select>
+
+  <select id="findNumOfAllApplication" resultType="java.lang.Integer">
+          select count(*)
+          from application
+      </select>
+    <select id="findNumOfApplicationByIf_succeed" resultType="java.lang.Integer">
+            select count(*)
+            from application
+            where if_succeed=#{if_succeed}
+        </select>
 </mapper>

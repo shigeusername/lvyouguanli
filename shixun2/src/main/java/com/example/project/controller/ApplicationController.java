@@ -86,11 +86,20 @@ public class ApplicationController {
         return ResultUtil.success(applicationDaoService.updateApplication(a));
     }
 
-    @GetMapping(value = "findAllApplication")
+    @PostMapping(value = "findAllApplication")
     @ResponseBody
     @ApiOperation("查询所有申请表（管理员端）")
-    public ResultUtil<List<ApplicationVO>> findAllApplication(){
-        return ResultUtil.success(applicationDaoService.findAllApplication());
+    public ResultUtil findAllApplication(@RequestBody  HashMap<String, String> map){
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum=(pageNum-1)*pageSize;
+
+        int size=applicationDaoService.findNumOfAllApplication();
+        List<ApplicationVO> avo= applicationDaoService.findAllApplication(pageNum,pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size",size);
+        res.put("information",avo);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findApplicationById")
@@ -157,7 +166,16 @@ public class ApplicationController {
     @ApiOperation("根据if_succeed筛选申请表（管理员端）")
     public ResultUtil selectApplicationByIf_succeed(@RequestBody  HashMap<String, String> map){
         String if_succeed=map.get("if_succeed");
-        return ResultUtil.success(applicationDaoService.selectApplicationByIf_succeed(if_succeed));
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum=(pageNum-1)*pageSize;
+
+        int size=applicationDaoService.findNumOfApplicationByIf_succeed(if_succeed);
+        List<ApplicationVO> avo= applicationDaoService.selectApplicationByIf_succeed(if_succeed,pageNum,pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size",size);
+        res.put("information",avo);
+        return ResultUtil.success(res);
     }
 
 }

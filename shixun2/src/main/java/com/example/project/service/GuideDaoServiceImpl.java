@@ -19,7 +19,7 @@ public class GuideDaoServiceImpl implements GuideDaoService{
 
     //查询所有导游（管理员端）
     @Override
-    public List<GuideVO> findAllGuide(){return guideDao.findAllGuide();}
+    public List<GuideVO> findAllGuide(int pageNum,int pageSize){return guideDao.findAllGuide(pageNum,pageSize);}
 
     //根据id查找导游（管理员端）
     @Override
@@ -43,5 +43,12 @@ public class GuideDaoServiceImpl implements GuideDaoService{
 
     //根据旅行社id查找导游
     @Override
-    public List<GuideVO> findGuideByAgency_id(int agency_id){return guideDao.findGuideByAgency_id(agency_id);}
+    public List<GuideVO> findGuideByAgency_id(int agency_id,int pageNum,int pageSize){return guideDao.findGuideByAgency_id(agency_id,pageNum,pageSize);}
+
+    //查询所有导游的数量
+    @Override
+    public int findNumOfAllGuide(){return guideDao.findNumOfAllGuide();};
+
+    //根据旅行社id查找导游
+    public int findNumOfGuideByAgency_id(int agency_id){return guideDao.findNumOfGuideByAgency_id(agency_id);}
 }

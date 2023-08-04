@@ -15,7 +15,7 @@ public interface GuideDao {
     int addGuide(Guide guide);
 
     //查询所有导游（管理员端）
-    List<GuideVO> findAllGuide();
+    List<GuideVO> findAllGuide(int pageNum,int pageSize);
 
     //根据id查找导游（管理员端）
     GuideVO findGuideById(int id);
@@ -33,5 +33,11 @@ public interface GuideDao {
     int guideApplyItinerary(int id,int itinerary_id);
 
     //根据旅行社id查找导游
-    List<GuideVO> findGuideByAgency_id(int agency_id);
+    List<GuideVO> findGuideByAgency_id(int agency_id,int pageNum,int pageSize);
+
+    //查询所有导游的数量
+    int findNumOfAllGuide();
+
+    //查询根据旅行社id查找导游的数量
+   int findNumOfGuideByAgency_id(int agency_id);
 }

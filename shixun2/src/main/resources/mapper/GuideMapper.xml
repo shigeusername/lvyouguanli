@@ -9,7 +9,8 @@
     <select id="findAllGuide" resultType="com.example.project.entity.VO.GuideVO">
         select guide.*,user.name as name ,user.gender as gender,user.phone as phone ,tourism_enterprise.name as agency_name,itinerary.name as itinerary_name
         from guide,user,tourism_enterprise,itinerary
-        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and ( guide.itinerary_id =itinerary.id or  guide.itinerary_id is null);
+        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and ( guide.itinerary_id =itinerary.id or  guide.itinerary_id is null)
+        limit #{pageNum},#{pageSize};
     </select>
 
     <select id="findGuideById" resultType="com.example.project.entity.VO.GuideVO">
@@ -40,6 +41,18 @@
     <select id="findGuideByAgency_id" resultType="com.example.project.entity.VO.GuideVO">
         select guide.*,user.name as name ,user.gender as gender,user.phone as phone ,tourism_enterprise.name as agency_name,itinerary.name as itinerary_name
         from guide,user,tourism_enterprise,itinerary
-        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and  guide.itinerary_id =itinerary.id and guide.affiliated_agency=#{agency_id};
+        where guide.id =user.id and tourism_enterprise.id=guide.affiliated_agency and  guide.itinerary_id =itinerary.id and guide.affiliated_agency=#{agency_id}
+        limit #{pageNum},#{pageSize};
     </select>
+
+    <select id="findNumOfAllGuide" resultType="java.lang.Integer">
+            select count(*)
+            from guide;
+        </select>
+
+     <select id="findNumOfGuideByAgency_id" resultType="java.lang.Integer">
+            select count(*)
+            from guide
+            where guide.affiliated_agency=#{agency_id};
+        </select>
 </mapper>

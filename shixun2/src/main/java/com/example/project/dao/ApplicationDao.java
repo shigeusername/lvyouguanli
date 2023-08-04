@@ -24,8 +24,8 @@ public interface ApplicationDao {
 
 
 
-    //查询所有申请表（管理员端）
-    List<ApplicationVO> findAllApplication();
+    //查询所有申请表（管理员端）满足分页
+    List<ApplicationVO> findAllApplication(int pageNum,int pageSize);
 
     //根据申请表的id查找申请表（管理端）
     ApplicationVO findApplicationById (int id);
@@ -36,6 +36,12 @@ public interface ApplicationDao {
     //根据id删除申请表
     int deleteApplicationById(int id);
 
-    //根据if_succeed筛选申请表
-    List<ApplicationVO> selectApplicationByIf_succeed(String if_succeed);
+    //根据if_succeed筛选申请表,满足分页
+    List<ApplicationVO> selectApplicationByIf_succeed(String if_succeed,int pageNum,int pageSize);
+
+    //查询所有申请表的数量
+    int findNumOfAllApplication();
+
+    //查询if_succeed=？的申请表的数量
+    int findNumOfApplicationByIf_succeed(String if_succeed);
 }
