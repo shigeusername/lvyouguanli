@@ -55,7 +55,7 @@ public class ComplaintController {
         int pageNum = Integer.parseInt(map.get("pageNum"));
         int pageSize = Integer.parseInt(map.get("pageSize"));
         pageNum = (pageNum - 1) * pageSize;
-        int size = complaintDaoService.findNumOfComplaintCoped();
+        int size = complaintDaoService.findNumOfComplaintUnCoped();
         List<ComplaintVO> complaintVOS = complaintDaoService.findComplaintUnCoped(pageNum, pageSize);
         Map<String, Object> res = new HashMap<>();
         res.put("size", size);

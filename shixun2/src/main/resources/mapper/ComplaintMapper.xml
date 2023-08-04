@@ -16,7 +16,7 @@
              tourism_enterprise
         where complaint.sender = user.id
           and complaint.enterprise_id = tourism_enterprise.id
-        limit #{pageNum} ,#{page_size};
+        limit #{pageNum} ,#{pageSize};
     </select>
     <select id="findComplaintById" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -49,7 +49,7 @@
         where complaint.sender = user.id
           and complaint.if_coped = 0
           and complaint.enterprise_id = tourism_enterprise.id
-        limit #{pageNum} ,#{page_size};
+        limit #{pageNum} ,#{pageSize};
     </select>
     <select id="findComplaintCoped" resultType="com.example.project.entity.VO.ComplaintVO">
         select complaint.id,
@@ -66,7 +66,7 @@
         where complaint.sender = user.id
           and complaint.if_coped = 1
           and complaint.enterprise_id = tourism_enterprise.id
-        limit #{pageNum} ,#{page_size};
+        limit #{pageNum} ,#{pageSize};
     </select>
     <select id="findNumOfAllComplaint" resultType="java.lang.Integer">
         select count(*)

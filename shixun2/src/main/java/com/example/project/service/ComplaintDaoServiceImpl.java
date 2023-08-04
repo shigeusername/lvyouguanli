@@ -34,7 +34,7 @@ public class ComplaintDaoServiceImpl implements ComplaintDaoService {
 
     @Override
     public List<ComplaintVO> findComplaintCoped(int pageNum, int pageSize) {
-        return complaintDao.findComplaintUnCoped(pageNum,pageSize);
+        return complaintDao.findComplaintCoped(pageNum,pageSize);
     }
 
     @Override
