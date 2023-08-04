@@ -11,9 +11,10 @@ import java.util.List;
 public class WarningDaoServiceImpl implements WarningDaoService{
     @Autowired
     WarningDao warningDao;
+
     @Override
-    public List<WarningVO> findAllWarning() {
-        return warningDao.findAllWarning();
+    public List<WarningVO> findAllWarning(int pageNum, int pageSize) {
+        return warningDao.findAllWarning(pageNum,pageSize);
     }
 
     @Override
@@ -22,23 +23,48 @@ public class WarningDaoServiceImpl implements WarningDaoService{
     }
 
     @Override
-    public List<WarningVO> findAllWarningNeedCope() {
-        return warningDao.findAllWarningNeedCope();
+    public List<WarningVO> findAllWarningNeedCope(int pageNum, int pageSize) {
+        return warningDao.findAllWarningNeedCope(pageNum, pageSize);
     }
 
     @Override
-    public List<WarningVO> findAllWarningNoRequired() {
-        return warningDao.findAllWarningNoRequired();
+    public List<WarningVO> findAllWarningNoRequired(int pageNum, int pageSize) {
+        return warningDao.findAllWarningNoRequired(pageNum, pageSize);
     }
 
     @Override
-    public List<WarningVO> findAllWarningCoping() {
-        return warningDao.findAllWarningCoping();
+    public List<WarningVO> findAllWarningCoping(int pageNum, int pageSize) {
+        return findAllWarningCoping(pageNum, pageSize);
     }
 
     @Override
-    public List<WarningVO> findAllWarningDone() {
-        return warningDao.findAllWarningDone();
+    public List<WarningVO> findAllWarningDone(int pageNum, int pageSize) {
+        return warningDao.findAllWarningDone(pageNum, pageSize);
+    }
+
+    @Override
+    public int findNumOfAllWarning() {
+        return warningDao.findNumOfAllWarning();
+    }
+
+    @Override
+    public int findNumOfAllWarningNeedCope() {
+        return warningDao.findNumOfAllWarningNeedCope();
+    }
+
+    @Override
+    public int findNumOfAllWarningNoRequired() {
+        return warningDao.findNumOfAllWarningNoRequired();
+    }
+
+    @Override
+    public int findNumOfWarningCoping() {
+        return warningDao.findNumOfWarningCoping();
+    }
+
+    @Override
+    public int findNumOfAllWarningDone() {
+        return warningDao.findNumOfAllWarningDone();
     }
 
     @Override

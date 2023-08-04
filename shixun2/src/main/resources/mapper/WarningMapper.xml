@@ -12,6 +12,7 @@
         from warning,
              user
         where warning.sender = user.id
+        limit #{pageNum} ,#{pageSize};
     </select>
     <select id="findWarningById" resultType="com.example.project.entity.VO.WarningVO">
         select warning.id,
@@ -36,6 +37,7 @@
              user
         where warning.sender = user.id
           and warning.need_cope = 0
+        limit #{pageNum} ,#{pageSize};
     </select>
     <select id="findAllWarningNoRequired" resultType="com.example.project.entity.VO.WarningVO">
         select warning.id,
@@ -48,6 +50,7 @@
              user
         where warning.sender = user.id
           and warning.need_cope = 1
+        limit #{pageNum} ,#{pageSize};
     </select>
     <select id="findAllWarningCoping" resultType="com.example.project.entity.VO.WarningVO">
         select warning.id,
@@ -60,6 +63,7 @@
              user
         where warning.sender = user.id
           and warning.need_cope = 2
+        limit #{pageNum} ,#{pageSize};
     </select>
     <select id="findAllWarningDone" resultType="com.example.project.entity.VO.WarningVO">
         select warning.id,
@@ -72,6 +76,31 @@
              user
         where warning.sender = user.id
           and warning.need_cope = 3
+        limit #{pageNum} ,#{pageSize};
+    </select>
+    <select id="findNumOfAllWarning" resultType="java.lang.Integer">
+        select count(*)
+        from warning
+    </select>
+    <select id="findNumOfAllWarningNeedCope" resultType="java.lang.Integer">
+        select count(*)
+        from warning
+        where warning.need_cope= 0;
+    </select>
+    <select id="findNumOfAllWarningNoRequired" resultType="java.lang.Integer">
+        select count(*)
+        from warning
+        where warning.need_cope = 1;
+    </select>
+    <select id="findNumOfWarningCoping" resultType="java.lang.Integer">
+        select count(*)
+        from warning
+        where warning.need_cope = 2;
+    </select>
+    <select id="findNumOfAllWarningDone" resultType="java.lang.Integer">
+        select count(*)
+        from warning
+        where warning.need_cope = 3;
     </select>
     <insert id="AddWarning">
         insert into warning (content, sender,need_cope , send_time,title)

@@ -2,6 +2,8 @@ package com.example.project.controller;
 
 import com.example.project.common.ResultUtil;
 import com.example.project.entity.Complaint;
+import com.example.project.entity.VO.ComplaintVO;
+import com.example.project.entity.VO.GuideVO;
 import com.example.project.service.ComplaintDaoServiceImpl;
 import com.example.project.service.TourismEnterpriseDaoService;
 import io.swagger.annotations.Api;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @Api
@@ -24,7 +28,15 @@ public class ComplaintController {
     @ResponseBody
     @ApiOperation("查看所有投诉")
     public ResultUtil findAllComplaint(@RequestBody(required = false) HashMap<String, String> map) {
-        return ResultUtil.success(complaintDaoService.findAllComplaint());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = complaintDaoService.findNumOfAllComplaint();
+        List<ComplaintVO> complaintVOS = complaintDaoService.findAllComplaint(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", complaintVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findComplaintById")
@@ -35,44 +47,35 @@ public class ComplaintController {
         return ResultUtil.success(complaintDaoService.findComplaintById(id));
     }
 
-    @PostMapping(value = "findComplaintBySender")
-    @ResponseBody
-    @ApiOperation("根据投诉者查找投诉")
-    public ResultUtil findComplaintBySender(@RequestBody HashMap<String, String> map) {
-        int sender = Integer.parseInt(map.get("sender"));
-        return ResultUtil.success(complaintDaoService.findComplaintBySender(sender));
-    }
-
-    @PostMapping(value = "findComplaintByEnterprise")
-    @ResponseBody
-    @ApiOperation("根据企业查找投诉")
-    public ResultUtil findComplaintByEnterprise(@RequestBody HashMap<String, String> map) {
-        int enterprise_id = Integer.parseInt(map.get("enterprise_id"));
-        System.out.println(enterprise_id);
-        return ResultUtil.success(complaintDaoService.findComplaintByEnterprise(enterprise_id));
-    }
-
-    @PostMapping(value = "findComplaintByLevel")
-    @ResponseBody
-    @ApiOperation("根据程度查找投诉")
-    public ResultUtil findComplaintByLevel(@RequestBody HashMap<String, String> map) {
-        int level = Integer.parseInt(map.get("level"));
-
-        return ResultUtil.success(complaintDaoService.findComplaintByLevel(level));
-    }
 
     @PostMapping(value = "findComplaintUnCoped")
     @ResponseBody
     @ApiOperation("查找所有未处理投诉")
     public ResultUtil findComplaintUnCoped(@RequestBody HashMap<String, String> map) {
-        return ResultUtil.success(complaintDaoService.findComplaintUnCoped());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = complaintDaoService.findNumOfComplaintCoped();
+        List<ComplaintVO> complaintVOS = complaintDaoService.findComplaintUnCoped(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", complaintVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findComplaintCoped")
     @ResponseBody
     @ApiOperation("查找所有已处理投诉")
     public ResultUtil findComplaintCoped(@RequestBody HashMap<String, String> map) {
-        return ResultUtil.success(complaintDaoService.findComplaintCoped());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = complaintDaoService.findNumOfComplaintCoped();
+        List<ComplaintVO> complaintVOS = complaintDaoService.findComplaintCoped(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", complaintVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "AddComplaint")
@@ -128,6 +131,6 @@ public class ComplaintController {
     public ResultUtil<Integer> ReviewComplaint(@RequestBody HashMap<String, String> map) {
         int id = Integer.parseInt(map.get("id"));
         String if_coped = map.get("if_coped");
-        return ResultUtil.success(complaintDaoService.ReviewComplaint(id,if_coped));
+        return ResultUtil.success(complaintDaoService.ReviewComplaint(id, if_coped));
     }
 }

@@ -31,7 +31,7 @@ public class TaskService {
                 }
             }
             long end = System.currentTimeMillis();
-            Thread.sleep(10000);
+            Thread.sleep(6000000);
             System.out.println("完成任务耗时：" + (end - start) / 1000 + "秒");
             System.out.println(Flag);
         }

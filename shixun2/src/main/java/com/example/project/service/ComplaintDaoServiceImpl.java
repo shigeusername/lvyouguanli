@@ -15,9 +15,10 @@ public class ComplaintDaoServiceImpl implements ComplaintDaoService {
     @Autowired
     ComplaintDao complaintDao;
 
+
     @Override
-    public List<ComplaintVO> findAllComplaint() {
-        return complaintDao.findAllComplaint();
+    public List<ComplaintVO> findAllComplaint(int pageNum, int pageSize) {
+        return complaintDao.findAllComplaint(pageNum, pageSize);
     }
 
     @Override
@@ -25,29 +26,30 @@ public class ComplaintDaoServiceImpl implements ComplaintDaoService {
         return complaintDao.findComplaintById(id);
     }
 
+
     @Override
-    public List<ComplaintVO> findComplaintBySender(int sender) {
-        return complaintDao.findComplaintBySender(sender);
+    public List<ComplaintVO> findComplaintUnCoped(int pageNum, int pageSize) {
+        return complaintDao.findComplaintUnCoped(pageNum, pageSize);
     }
 
     @Override
-    public List<ComplaintVO> findComplaintByEnterprise(int enterprise_id) {
-        return complaintDao.findComplaintByEnterprise(enterprise_id);
+    public List<ComplaintVO> findComplaintCoped(int pageNum, int pageSize) {
+        return complaintDao.findComplaintUnCoped(pageNum,pageSize);
     }
 
     @Override
-    public List<ComplaintVO> findComplaintByLevel(int level) {
-        return complaintDao.findComplaintByLevel(level);
+    public int findNumOfAllComplaint() {
+        return complaintDao.findNumOfAllComplaint();
     }
 
     @Override
-    public List<ComplaintVO> findComplaintUnCoped() {
-        return complaintDao.findComplaintUnCoped();
+    public int findNumOfComplaintUnCoped() {
+        return complaintDao.findNumOfComplaintUnCoped();
     }
 
     @Override
-    public List<ComplaintVO> findComplaintCoped() {
-        return complaintDao.findComplaintCoped();
+    public int findNumOfComplaintCoped() {
+        return complaintDao.findNumOfComplaintCoped();
     }
 
     @Override
@@ -72,6 +74,6 @@ public class ComplaintDaoServiceImpl implements ComplaintDaoService {
 
     @Override
     public int ReviewComplaint(int id, String if_coped) {
-        return complaintDao.ReviewComplaint(id,if_coped);
+        return complaintDao.ReviewComplaint(id, if_coped);
     }
 }

@@ -8,19 +8,22 @@ import java.util.List;
 
 @Service
 public interface ComplaintDaoService {
-    List<ComplaintVO> findAllComplaint();
+    List<ComplaintVO> findAllComplaint(int pageNum, int pageSize);
 
     ComplaintVO findComplaintById(int id);
 
-    List<ComplaintVO> findComplaintBySender(int sender);
+    List<ComplaintVO> findComplaintUnCoped(int pageNum, int pageSize);
 
-    List<ComplaintVO> findComplaintByEnterprise(int enterprise_id);
+    List<ComplaintVO> findComplaintCoped(int pageNum, int pageSize);
 
-    List<ComplaintVO> findComplaintByLevel(int level);
+    //查询所有投诉的数量
+    int findNumOfAllComplaint();
 
-    List<ComplaintVO> findComplaintUnCoped();
+    //查询所有未处理的数量
+    int findNumOfComplaintUnCoped();
 
-    List<ComplaintVO> findComplaintCoped();
+    //查询所有已处理投诉的数量
+    int findNumOfComplaintCoped();
 
     int AddComplaint(Complaint complain);
 

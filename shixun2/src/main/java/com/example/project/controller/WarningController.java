@@ -1,6 +1,8 @@
 package com.example.project.controller;
 
 import com.example.project.common.ResultUtil;
+import com.example.project.entity.VO.ComplaintVO;
+import com.example.project.entity.VO.WarningVO;
 import com.example.project.entity.Warning;
 import com.example.project.service.WarningDaoServiceImpl;
 import io.swagger.annotations.Api;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @Api
@@ -22,7 +26,15 @@ public class WarningController {
     @ResponseBody
     @ApiOperation("查看所有警告")
     public ResultUtil findAllWarning(@RequestBody(required = false) HashMap<String, String> map) {
-        return ResultUtil.success(warningDaoService.findAllWarning());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = warningDaoService.findNumOfAllWarning();
+        List<WarningVO> warningVOS = warningDaoService.findAllWarning(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", warningVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findWarningById")
@@ -37,28 +49,60 @@ public class WarningController {
     @ResponseBody
     @ApiOperation("查看所有需审批警告")
     public ResultUtil findAllWarningNeedCope(@RequestBody HashMap<String, String> map) {
-        return ResultUtil.success(warningDaoService.findAllWarningNeedCope());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = warningDaoService.findNumOfAllWarningNeedCope();
+        List<WarningVO> warningVOS = warningDaoService.findAllWarningNeedCope(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", warningVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findAllWarningNoRequired")
     @ResponseBody
     @ApiOperation("查看所有直接发布警告")
     public ResultUtil findAllWarningNoRequired(@RequestBody HashMap<String, String> map) {
-        return ResultUtil.success(warningDaoService.findAllWarningNoRequired());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = warningDaoService.findNumOfAllWarningNoRequired();
+        List<WarningVO> warningVOS = warningDaoService.findAllWarningNoRequired(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", warningVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findAllWarningCoping")
     @ResponseBody
     @ApiOperation("查看所有正在处理警告")
     public ResultUtil findAllWarningCoping(@RequestBody HashMap<String, String> map) {
-        return ResultUtil.success(warningDaoService.findAllWarningCoping());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = warningDaoService.findNumOfWarningCoping();
+        List<WarningVO> warningVOS = warningDaoService.findAllWarningCoping(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", warningVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "findAllWarningDone")
     @ResponseBody
     @ApiOperation("查看所有处理完成警告")
     public ResultUtil findAllWarningDone(@RequestBody HashMap<String, String> map) {
-        return ResultUtil.success(warningDaoService.findAllWarningDone());
+        int pageNum = Integer.parseInt(map.get("pageNum"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+        pageNum = (pageNum - 1) * pageSize;
+        int size = warningDaoService.findNumOfAllWarningDone();
+        List<WarningVO> warningVOS = warningDaoService.findAllWarningDone(pageNum, pageSize);
+        Map<String, Object> res = new HashMap<>();
+        res.put("size", size);
+        res.put("information", warningVOS);
+        return ResultUtil.success(res);
     }
 
     @PostMapping(value = "AddWarning")
