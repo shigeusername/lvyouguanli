@@ -34,7 +34,7 @@ public class WarningDaoServiceImpl implements WarningDaoService{
 
     @Override
     public List<WarningVO> findAllWarningCoping(int pageNum, int pageSize) {
-        return findAllWarningCoping(pageNum, pageSize);
+        return warningDao.findAllWarningCoping(pageNum, pageSize);
     }
 
     @Override
